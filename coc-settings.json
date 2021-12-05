@@ -1,0 +1,20 @@
+{
+  //coc-prettier
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "html",
+    "js",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "graphql",
+    "java"
+  ],
+  // coc-php
+  "intelephense.licenceKey": "your licence key",
+  //coc-java
+  "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/home/rouf/.config/coc/extensions/node_modules/coc-java-lombok/jar/lombok.jar\"",
+  "java.referencesCodeLens.enabled": true
+}
