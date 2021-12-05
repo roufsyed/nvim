@@ -1,6 +1,6 @@
-"------------------------------------------------------------------------------------------------------------------------------------------------
+"-----------------------------------------------------------------------------------------------------------------------------------------------
 "Basic setters
-"------------------------------------------------------------------------------------------------------------------------------------------------
+"-----------------------------------------------------------------------------------------------------------------------------------------------
 set number       " Set number
 set termguicolors " True color
 set rnu 		 " Set relative number
@@ -32,7 +32,6 @@ set autoindent
 set fileformat=unix
 
 "The below code sets tab config to specific files mentioned only.
-"Tab configurations for various languages
 au BufNewFile,BufRead *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html,*.php 
     \ set tabstop=2 |
     \ set softtabstop=2 |
@@ -59,6 +58,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'ap/vim-css-color'
 Plug 'nanotech/jellybeans.vim'

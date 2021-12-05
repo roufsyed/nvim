@@ -19,7 +19,6 @@ map <C-v> "+p
 nnoremap <C-a> ggVG
 nnoremap X Vx
 
-
 " Basic Buffer switch and delete config for normal mode
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
