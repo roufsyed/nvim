@@ -6,10 +6,17 @@ set background=dark
  " \}
  colorscheme jellybeans
 
-" lightline config
- let g:lightline = {
-       \ 'colorscheme': 'jellybeans',
-       \ }
+" Lightline config
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 "Cursor Settings
 " Use a line cursor within insert mode and a block cursor everywhere else.
