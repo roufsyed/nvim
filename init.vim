@@ -21,6 +21,7 @@ set hidden      " Keeps files open in the background.
 set noerrorbells " Turns off bell sound
 set noswapfile  " Disable swap files
 set scrolloff=8 " Doesn't allow cursor to go all the way to the last line
+set noshowmode  " Hides default mode display
 
 set tabstop=4 
 set softtabstop=4 
@@ -59,6 +60,8 @@ Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'ap/vim-css-color'
 Plug 'nanotech/jellybeans.vim'
