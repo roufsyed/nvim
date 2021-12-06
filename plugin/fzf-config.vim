@@ -13,9 +13,9 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 
 set timeoutlen=500 "Set timeout length to 500 ms
 
-nnoremap <leader>fr :Rg<CR>
 nnoremap <leader>ff :Files<cr>
-noremap <leader>fb :Buffers<cr>
+nnoremap <leader>fr :Rg<CR>
+nnoremap <leader>fb :Buffers<cr>
 nnoremap <leader>fs :BLines<cr>
 nnoremap <leader>fm :Marks<cr>
 nnoremap <leader>fl :Lines<cr>
