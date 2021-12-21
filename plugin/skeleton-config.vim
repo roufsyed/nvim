@@ -1,3 +1,3 @@
 "Skeleton for java and cpp
-autocmd BufNewFile *.cpp r ~/.vim/templates/skeleton.cpp
-autocmd BufNewFile *.java r ~/.vim/templates/skeleton.java
+autocmd BufNewFile *.cpp r ~/.config/nvim/templates/skeleton.cpp
+autocmd BufNewFile *.java r ~/.config/nvim/templates/skeleton.java
