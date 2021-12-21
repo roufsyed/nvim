@@ -9,7 +9,7 @@
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --preview="bat --theme={OneHalfDark} --color always --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow'.shellescape(<q-args>), 1, <bang>0)
 
 set timeoutlen=500 "Set timeout length to 500 ms
 
