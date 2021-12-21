@@ -65,4 +65,5 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'ap/vim-css-color'
 Plug 'nanotech/jellybeans.vim'
+Plug 'mhinz/vim-startify'
 call plug#end()
