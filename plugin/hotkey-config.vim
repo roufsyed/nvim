@@ -10,8 +10,8 @@ tnoremap jj <C-\><C-n>
 " nnoremap ; :
 
 "Shortcuts for vertical and horizontal terminal
-nmap <F4> :split term://bash<CR><C-w>L:vertical resize 60<CR>
-nmap <F3> :split term://bash<CR><C-w>J:resize 10<CR> 
+nmap <F4> <silent> :split term://bash<CR><C-w>L:vertical resize 60<CR>
+nmap <F3> <silent> :split term://bash<CR><C-w>J:resize 10<CR> 
 
 "copy, paste, select all and delete current line
 map <C-c> "+y
@@ -23,7 +23,7 @@ nnoremap Y Vy
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
 nnoremap <silent><leader>d :bd<cr>
-" nnoremap <silent><leader>dd :bd!<cr>
+" nnoremap <silent><leader>dd :bd!<cr> "Disabled because it creates a 200ms delay
 
 "save and quit
 nnoremap <leader>w :update<CR>
@@ -40,7 +40,7 @@ function! Init()
     :e init.vim
 endfunction
 
-nnoremap <silent><F8> :e /home/rouf/.config/nvim/init.vim<cr>
+nnoremap <silent><F8> :call Init()<cr>
 nnoremap ss :source %<cr>
 
 "opens netrw in right vsplit
