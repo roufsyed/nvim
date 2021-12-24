@@ -23,6 +23,10 @@ set noswapfile  " Disable swap files
 set scrolloff=8 " Doesn't allow cursor to go all the way to the last line
 set noshowmode  " Hides default mode display
 
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
@@ -49,21 +53,21 @@ let mapleader = "," "map leader to coma
 "Plugs - Various plugins to make life simpler.
 "-----------------------------------------------------------------------------------------------------------------------------------------------
 call plug#begin()
-Plug 'tpope/vim-commentary'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-commentary' " comment and uncomment multiple lines easily
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
 Plug 'udalov/kotlin-vim'
-Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim' " Status line
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-surround'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
-Plug 'rbong/vim-flog'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'ryanoasis/vim-devicons'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'ap/vim-css-color'
-Plug 'nanotech/jellybeans.vim'
-Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf.vim' " fuzzy file search for vim, prereq:fzf
+Plug 'Raimondi/delimitMate' " Quatation marks and bracket completion
+Plug 'tpope/vim-surround' " Surrounds with quotations, brackets and tags
+Plug 'mhinz/vim-signify' " Git signs in the sign column
+Plug 'tpope/vim-fugitive' " Git inside the editor
+Plug 'rbong/vim-flog' " Shows commit logs
+Plug 'MattesGroeger/vim-bookmarks' " Bookmarks made easy
+Plug 'ryanoasis/vim-devicons' " I dont know why I have these
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Mostly using it for better syntax highlighting
+Plug 'ap/vim-css-color' " Preview colors in css files
+Plug 'nanotech/jellybeans.vim' " ColorScheme
+Plug 'mhinz/vim-startify' " Startup screen
 call plug#end()
