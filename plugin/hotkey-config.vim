@@ -20,6 +20,7 @@ nnoremap <C-a> ggVG
 nnoremap X Vx
 nnoremap Y Vy
 
+nnoremap <silent><leader>l :ls<cr>
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
 nnoremap <silent><leader>d :bd<cr>
