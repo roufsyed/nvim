@@ -55,7 +55,7 @@ let mapleader = "," "map leader to coma
 call plug#begin()
 Plug 'tpope/vim-commentary' " comment and uncomment multiple lines easily
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
-Plug 'udalov/kotlin-vim'
+Plug 'udalov/kotlin-vim' " Kotlin syntax highlighting and autocompletion
 Plug 'itchyny/lightline.vim' " Status line
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' " fuzzy file search for vim, prereq:fzf
@@ -63,9 +63,7 @@ Plug 'Raimondi/delimitMate' " Quatation marks and bracket completion
 Plug 'tpope/vim-surround' " Surrounds with quotations, brackets and tags
 Plug 'mhinz/vim-signify' " Git signs in the sign column
 Plug 'tpope/vim-fugitive' " Git inside the editor
-Plug 'rbong/vim-flog' " Shows commit logs
 Plug 'MattesGroeger/vim-bookmarks' " Bookmarks made easy
-Plug 'ryanoasis/vim-devicons' " I dont know why I have these
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Mostly using it for better syntax highlighting
 Plug 'ap/vim-css-color' " Preview colors in css files
 Plug 'nanotech/jellybeans.vim' " ColorScheme
