@@ -10,8 +10,8 @@ tnoremap jj <C-\><C-n>
 " nnoremap ; :
 
 "Shortcuts for vertical and horizontal terminal
-nmap <F4> <silent> :split term://bash<CR><C-w>L:vertical resize 60<CR>
-nmap <F3> <silent> :split term://bash<CR><C-w>J:resize 10<CR> 
+nmap <silent><F4> :split term://bash<CR><C-w>L:vertical resize 60<CR>
+nmap <silent><F3> :split term://bash<CR><C-w>J:resize 10<CR> 
 
 "copy, paste, select all and delete current line
 map <C-c> "+y
