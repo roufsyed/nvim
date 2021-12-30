@@ -13,13 +13,12 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --preview="bat --theme={OneHa
 
 set timeoutlen=500 "Set timeout length to 500 ms
 
-nnoremap <leader>ff :Files<cr>
-nnoremap <leader>fr :Rg<CR>
-nnoremap <leader>fb :Buffers<cr>
-nnoremap <leader>fs :BLines<cr>
-nnoremap <leader>fm :Marks<cr>
-nnoremap <leader>fl :Lines<cr>
-nnoremap <leader>fc :Maps
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>r :Rg<CR>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>s :BLines<cr>
+nnoremap <leader>l :Lines<cr>
+nnoremap <leader>m :Maps
 
 " /* " Command	List */
 " /* " :Files [PATH]	Files (runs $FZF_DEFAULT_COMMAND if defined) */
