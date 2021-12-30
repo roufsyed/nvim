@@ -18,7 +18,8 @@ nnoremap <leader>r :Rg<CR>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>s :BLines<cr>
 nnoremap <leader>l :Lines<cr>
-nnoremap <leader>m :Maps
+nnoremap <leader>m :Maps<cr>
+nnoremap <leader>c :Commits<cr>
 
 " /* " Command	List */
 " /* " :Files [PATH]	Files (runs $FZF_DEFAULT_COMMAND if defined) */
