@@ -83,6 +83,15 @@ nnoremap <A-j> <C-w>J
 nnoremap <A-h> <C-w>H
 nnoremap <A-l> <C-w>L
 
+" Git Shortcuts
+nnoremap <leader>ga :Git add %<cr>
+nnoremap <leader>gc :Git commit<cr>
+nnoremap <leader>gp :Git push origin 
+nnoremap <leader>gl :Git log<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gdt :Git difftool<cr>
+nnoremap <leader>gs :Git stas<cr>
+
 " Compilations hotkeys
 autocmd filetype python map <F2> :w<CR>:vsplit term://python3 %<CR><C-w>L
 autocmd filetype cpp map <F2> :w<CR>:vsplit term://g++ -std=c++14 % && ./a.out<CR><C-w>L
