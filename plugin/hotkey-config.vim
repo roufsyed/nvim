@@ -9,18 +9,22 @@ tnoremap jj <C-\><C-n>
 "remap semicolon to colon for normal mode
 " nnoremap ; :
 
-"Shortcuts for vertical and horizontal terminal
-nmap <silent><F4> :split term://bash<CR><C-w>L:vertical resize 60<CR>
-nmap <silent><F3> :split term://bash<CR><C-w>J:resize 10<CR> 
+"Toggle for vertical and horizontal terminal
+nmap <silent><F4> :split term://bash<CR><C-w>L:vertical resize 60<CR>i
+tnoremap <silent><F4> <Esc><C-\><C-n>:bd!<CR>
+nmap <silent><F3> :split term://bash<CR><C-w>J:resize 10<CR>i
+tnoremap <silent><F3> <Esc><C-\><C-n>:bd!<CR>
 
 "copy, paste, select all and delete current line
 map <C-c> "+y
 map <C-v> "+p
 nnoremap <C-a> ggVG
-nnoremap X Vx
-nnoremap Y Vy
 
-nnoremap <silent><leader>l :ls<cr>
+"Delete entire line
+nnoremap <silent>X Vx 
+"Copy entire line
+nnoremap <silent>Y Vy 
+
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
 nnoremap <silent><leader>d :bd<cr>
@@ -33,7 +37,7 @@ nnoremap <leader>q :q<CR>
 "Search and replace
 " c : confirm before deleting
 " g : global edit
-nnoremap <leader>sr :%s/<C-r>+//c
+nnoremap <leader>sr :%s/<C-r>+//gc
 
 "to open init and source
 function! Init()
@@ -90,7 +94,7 @@ nnoremap <leader>gp :Git push origin
 nnoremap <leader>gl :Git log<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gdt :Git difftool<cr>
-nnoremap <leader>gs :Git stas<cr>
+nnoremap <leader>gs :Git status<cr>
 
 " Compilations hotkeys
 autocmd filetype python map <F2> :w<CR>:vsplit term://python3 %<CR><C-w>L
