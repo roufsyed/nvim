@@ -18,7 +18,8 @@ nnoremap <leader>r :Rg<CR>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>s :BLines<cr>
 nnoremap <leader>l :Lines<cr>
-nnoremap <leader>m :Maps<cr>
+nnoremap <leader>m :Marks<cr>
+nnoremap <leader>h :Maps<cr>
 nnoremap <leader>c :Commits<cr>
 
 " /* " Command	List */
