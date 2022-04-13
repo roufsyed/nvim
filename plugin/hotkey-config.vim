@@ -88,13 +88,14 @@ nnoremap <A-h> <C-w>H
 nnoremap <A-l> <C-w>L
 
 " Git Shortcuts
-nnoremap <leader>g :Git<cr>
+nnoremap <leader>gg :Git<cr>
 nnoremap <leader>ga :Git add %<cr>
 nnoremap <leader>gc :Git commit<cr>
 nnoremap <leader>gp :Git push origin 
 nnoremap <leader>gl :Git log<cr>
 nnoremap <leader>gd :Git diff<cr>
-nnoremap <leader>gds :Gdiffsplit<cr>
+nnoremap <leader>gdv :Gvdiffsplit<cr><A-l>
+nnoremap <leader>gds :Gdiffsplit<cr><A-l>
 nnoremap <leader>gdt :Git difftool<cr>
 nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>gm :Git merge<cr>
