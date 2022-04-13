@@ -95,6 +95,8 @@ nnoremap <leader>gl :Git log<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gdt :Git difftool<cr>
 nnoremap <leader>gs :Git status<cr>
+nnoremap <leader>gm :Git merge<cr>
+nnoremap <leader>gmt :git mergetool<cr>
 
 " Compilations hotkeys
 autocmd filetype python map <F2> :w<CR>:vsplit term://python3 %<CR><C-w>L
