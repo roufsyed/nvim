@@ -9,9 +9,12 @@
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --preview="bat --theme={OneHalfDark} --color always --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow'.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --preview="bat --theme={jellybeans} --color always --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow'.shellescape(<q-args>), 1, <bang>0)
 
 set timeoutlen=500 "Set timeout length to 500 ms
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>r :Rg<CR>
