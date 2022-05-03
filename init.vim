@@ -67,5 +67,5 @@ Plug 'tpope/vim-rhubarb'  " :GBrowse extension - opens github links in the brows
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Mostly using it for better syntax highlighting
 Plug 'ap/vim-css-color' " Preview colors in css files
 Plug 'nanotech/jellybeans.vim' " ColorScheme
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'davidgranstrom/nvim-markdown-preview'
 call plug#end()
