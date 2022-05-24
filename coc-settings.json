@@ -1,9 +1,9 @@
 {
   //coc-prettier
+  // Currently these are the only languages supported
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "html",
-    "js",
     "javascript",
     "javascriptreact",
     "typescript",
