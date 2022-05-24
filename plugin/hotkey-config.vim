@@ -17,7 +17,7 @@ tnoremap <silent><F3> <Esc><C-\><C-n>:bd!<CR>
 
 "copy, paste, select all and delete current line
 map <C-c> "+y
-map <C-v> "+p
+map <C-p> "+p
 nnoremap <C-a> ggVG
 
 "Delete entire line
