@@ -65,7 +65,8 @@ Plug 'mhinz/vim-signify' " Git signs in the sign column
 Plug 'tpope/vim-fugitive' " Git inside the editor
 Plug 'tpope/vim-rhubarb'  " :GBrowse extension - opens github links in the browser
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Mostly using it for better syntax highlighting
-Plug 'ap/vim-css-color' " Preview colors in css files
+" Plug 'ap/vim-css-color' " Preview colors in css files
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'nanotech/jellybeans.vim' " ColorScheme
 Plug 'davidgranstrom/nvim-markdown-preview'
 call plug#end()
