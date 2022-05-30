@@ -60,6 +60,10 @@ Plug 'itchyny/lightline.vim' " Status line
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' " fuzzy file search for vim, prereq:fzf
 Plug 'Raimondi/delimitMate' " Quatation marks and bracket completion
+Plug 'preservim/nerdtree' " NerdTree
+Plug 'PhilRunninger/nerdtree-visual-selection' " nerdtree copy, paste and delete
+Plug 'Xuyuanp/nerdtree-git-plugin' " Git signs in nerdtree
+Plug 'PhilRunninger/nerdtree-buffer-ops' " Buffer highlighting in nerdtree
 Plug 'tpope/vim-surround' " Surrounds with quotations, brackets and tags
 Plug 'mhinz/vim-signify' " Git signs in the sign column
 Plug 'tpope/vim-fugitive' " Git inside the editor
