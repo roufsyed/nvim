@@ -29,7 +29,9 @@ nnoremap <silent>Y Vy
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
 nnoremap <silent><leader>d :bd<cr>
-" nnoremap <silent><leader>dd :bd!<cr> "Disabled because it creates a 200ms delay
+
+"Disabled because it creates a 200ms delay due to ,d is reserved to delete buffer
+" nnoremap <silent><leader>dd :bd!<cr> 
 
 "save and quit
 nnoremap <leader>w :update<CR>
