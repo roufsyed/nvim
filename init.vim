@@ -64,6 +64,7 @@ Plug 'preservim/nerdtree' " NerdTree
 Plug 'PhilRunninger/nerdtree-visual-selection' " nerdtree copy, paste and delete
 Plug 'Xuyuanp/nerdtree-git-plugin' " Git signs in nerdtree
 Plug 'PhilRunninger/nerdtree-buffer-ops' " Buffer highlighting in nerdtree
+Plug 'flw-cn/vim-nerdtree-l-open-h-close' " h and l to open and close nerdtree node
 Plug 'tpope/vim-surround' " Surrounds with quotations, brackets and tags
 Plug 'mhinz/vim-signify' " Git signs in the sign column
 Plug 'tpope/vim-fugitive' " Git inside the editor
