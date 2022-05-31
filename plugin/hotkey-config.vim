@@ -25,6 +25,7 @@ nnoremap <silent>X Vx
 "Copy entire line
 nnoremap <silent>Y Vy 
 
+" Buffer navigations
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
 nnoremap <silent><leader>d :bd<cr>
@@ -48,10 +49,14 @@ endfunction
 nnoremap <silent><F8> :call Init()<cr>
 nnoremap ss :source %<cr>
 
-"opens netrw in right vsplit
-nnoremap <leader>e :Explore<cr>
-nnoremap <leader>v :Vexplore!<cr>
-nnoremap <leader>t :Texplore<cr>
+"NERDTreeToggle
+nnoremap <silent><leader>e :NERDTreeToggle<cr>
+
+"vertical split current buffer
+nnoremap <leader>v :vsp<cr>
+
+" opens a new tab
+nnoremap <leader>t :tabnew<cr>
 
 "Resize window
 nnoremap <silent><leader>- :vertical resize -5<CR>
@@ -71,7 +76,7 @@ nnoremap <leader>k :m .-2<CR>==
 inoremap <C-j> <esc>:m .+1<CR>i
 inoremap <C-k> <esc>:m .-2<CR>i
 
-"To move to a different window
+"To move to a different window in terminal and terminal buffer
 tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
