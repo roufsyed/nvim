@@ -101,7 +101,6 @@ Plug 'kylechui/nvim-surround' " Surrounds with quotation, brackets and tag
 Plug 'szw/vim-maximizer' " Maximize and minimize window
 Plug 'ackyshake/Spacegray.vim' " Space ColorScheme
 Plug 'EdenEast/nightfox.nvim' " nightfox ColorScheme
-Plug 'alvan/vim-closetag' " Auto close tags
 Plug 'anuvyklack/hydra.nvim' " Force custom mode
 Plug 'seblj/nvim-tabline' " Fancy tab bar
 Plug 'sindrets/winshift.nvim' " Move window around easily
