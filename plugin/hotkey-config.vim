@@ -4,26 +4,29 @@
 
 "remap to jj to esc and to get into normal mode in terminal
 imap jj <Esc>
+imap JJ <Esc>
 tnoremap jj <C-\><C-n>
 
-"remap semicolon to colon for normal mode
-" nnoremap ; :
-
 "Toggle for vertical and horizontal terminal
-nmap <silent><F4> :split term://bash<CR><C-w>L:vertical resize 60<CR>i
+nmap <silent><F4> :split term://bash<CR>jj<C-w>L:vertical resize 60<CR>i
 tnoremap <silent><F4> <Esc><C-\><C-n>:bd!<CR>
-nmap <silent><F3> :split term://bash<CR><C-w>J:resize 10<CR>i
+nmap <silent><F3> :split term://bash<CR>jj<C-w>J:resize 14<CR>iclear<cr>
 tnoremap <silent><F3> <Esc><C-\><C-n>:bd!<CR>
 
 "copy, paste, select all and delete current line
 map <C-c> "+y
-map <C-p> "+p
+" map <C-v> "+p
+imap <C-c> <Esc>V"+yi
+" imap <C-v> <Esc>"+pli
 nnoremap <C-a> ggVG
 
-"Delete entire line
-nnoremap <silent>X Vx 
-"Copy entire line
-nnoremap <silent>Y Vy 
+" Macros for adding, removing checklist, putting tick and removing it
+" [✓]  testing
+" let @a='$F[ca[jjx$'
+" let @b='^i[ ] jj$'
+let @c='^ci[✓jj$'
+let @d='^ci[✕jj$'
+" let @d='^ci[ jj$'
 
 " Buffer navigations
 nnoremap <silent><leader>n :bn<cr>
@@ -49,21 +52,13 @@ function! Init()
 endfunction
 
 nnoremap <silent><F8> :call Init()<cr>
-nnoremap ss :source %<cr>
+nnoremap ss :source %<CR>
 
-"NERDTreeToggle
-nnoremap <silent><leader>e :NERDTreeToggle<cr>
-
-"vertical split current buffer
-nnoremap <leader>v :vsp<cr>
+"nvim-tree toggle
+nnoremap <silent><leader>e :NvimTreeToggle<cr>
 
 " opens a new tab
-nnoremap <leader>t :tabnew<cr>
-
-"Resize window
-nnoremap <silent><leader>- :vertical resize -5<CR>
-nnoremap <silent><leader>= :vertical resize +5<CR>
-nnoremap <silent><leader>0 :vertical resize 100<CR>
+nnoremap <silent><leader>t :tabnew<cr>:NvimTreeToggle<cr>
 
 "cnext, cprevios and copen
 nmap <C-[> :cnext<cr>
@@ -75,8 +70,6 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
-inoremap <C-j> <esc>:m .+1<CR>i
-inoremap <C-k> <esc>:m .-2<CR>i
 
 "To move to a different window in terminal and terminal buffer
 tnoremap <C-h> <C-\><C-N><C-w>h
@@ -87,12 +80,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-"To move windows around
-nnoremap <A-k> <C-w>K
-nnoremap <A-j> <C-w>J
-nnoremap <A-h> <C-w>H
-nnoremap <A-l> <C-w>L
 
 " Git Shortcuts
 nnoremap <leader>gg :Git<cr>
@@ -121,14 +108,9 @@ autocmd filetype javascript map <F2> :w<CR>:vsplit term://node % <CR><C-w>L
 autocmd BufReadPost *.kt setlocal filetype=kotlin "vim was not recognizing kotlin file by default so had to explicitly define it.
 autocmd filetype kotlin map <F2> :w<CR>:vsplit term://kotlinc % -include-runtime -d a.jar && java -jar a.jar<CR><C-w>L
 
-"THE CODE BELOW IS NOT OPTIMIZED FOR NVIM, IT ONLY WORKS FOR VIM
-"Specific to /home/cp.cpp for competitive programming. n"
-"Note: does not work without a file type. tried $
-" function! CP()
-" 	:w
-" 	:bel vert term
-" 	:vertical resize 60
-" endfunction 
-" autocmd filetype cpp map <F12> :call CP()<CR>clear && g++ -std=c++14 cp.cpp && ./a.out <input.txt<CR>
-" autocmd filetype cpp map <F10> :call CP()<CR>clear && g++ -std=c++14 asd.cpp && ./a.out<CR>
+" winshift plugin keybinds
+" Start Win-Move mode:
+nnoremap <C-W>m <Cmd>WinShift<CR>
 
+" Swap two windows:
+nnoremap <C-W>X <Cmd>WinShift swap<CR>

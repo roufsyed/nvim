@@ -5,12 +5,11 @@ set number       " Set number
 set termguicolors " True color
 set rnu 		 " Set relative number
 set wrap   		 " Line wrapper
-set linebreak    " Sends entire word to next line rather than a single letter(WordWrap)
-" set autochdir    " Auto change directory: To make editting file directory default
+
 set mouse=a
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes  " Enable signcolumn for all the buffers
 autocmd FileType netrw setlocal signcolumn=no  " Disable signcolumn in netrw
-set laststatus=2 " Enable status line
+set laststatus=2 " Enable status line and set it to be global for all splits
 set t_Co=256      " Enable true color
 set syntax=on    "Enable synatx highlighting
 set nohlsearch	" Highlight all search results
@@ -22,11 +21,41 @@ set noerrorbells " Turns off bell sound
 set noswapfile  " Disable swap files
 set scrolloff=8 " Doesn't allow cursor to go all the way to the last line
 set noshowmode  " Hides default mode display
+set cursorline " Highlights cursor row
+
+" use filetype.lua instead of filetype.vim
+let g:do_filetype_lua = 1
+let g:did_load_filetypes = 0
+
+" Cusorline config to hide it in inactive window
+augroup CursorLine 
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
+" Nvim built-in terminal config
+augroup terminal_settings
+autocmd!
+
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
+
+" Ignore various filetypes as those will close terminal automatically
+" Ignore fzf, ranger, coc
+autocmd TermClose term://*
+      \ if (expand('<afile>') !~ "fzf") && (expand('<afile>') !~ "ranger") && (expand('<afile>') !~ "coc") |
+      \   call nvim_input('<CR>')  |
+      \ endif
+augroup END
 
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
 
+" Tab Config
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
@@ -36,15 +65,15 @@ set smartindent
 set autoindent 
 set fileformat=unix
 
-"The below code sets tab config to specific files mentioned only.
-au BufNewFile,BufRead *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html,*.php 
+" Tab config for specific filetypes
+au BufNewFile,BufRead *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html,*.php,*.lua 
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
     \ set textwidth=120 |
     \ set expandtab |
     \ set autoindent |
-    \ set fileformat=unix |
+    \ set fileformat=unix
 
 "Remap leader 
 let mapleader = "," "map leader to coma 
@@ -53,25 +82,33 @@ let mapleader = "," "map leader to coma
 "Plugs - Various plugins to make life simpler.
 "-----------------------------------------------------------------------------------------------------------------------------------------------
 call plug#begin()
-Plug 'tpope/vim-commentary' " comment and uncomment multiple lines easily
+Plug 'nvim-lualine/lualine.nvim' " Status line
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Actual fzf program
+Plug 'junegunn/fzf.vim' " fuzzy file search for vim, prereq:fzf
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'antoinemadec/FixCursorHold.nvim' " Fix CursorHold Performance
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
 Plug 'udalov/kotlin-vim' " Kotlin syntax highlighting and autocompletion
-Plug 'itchyny/lightline.vim' " Status line
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim' " fuzzy file search for vim, prereq:fzf
 Plug 'Raimondi/delimitMate' " Quatation marks and bracket completion
-Plug 'preservim/nerdtree' " NerdTree
-Plug 'PhilRunninger/nerdtree-visual-selection' " nerdtree copy, paste and delete
-Plug 'Xuyuanp/nerdtree-git-plugin' " Git signs in nerdtree
-Plug 'PhilRunninger/nerdtree-buffer-ops' " Buffer highlighting in nerdtree
-Plug 'flw-cn/vim-nerdtree-l-open-h-close' " h and l to open and close nerdtree node
-Plug 'tpope/vim-surround' " Surrounds with quotations, brackets and tags
-Plug 'mhinz/vim-signify' " Git signs in the sign column
 Plug 'tpope/vim-fugitive' " Git inside the editor
-Plug 'tpope/vim-rhubarb'  " :GBrowse extension - opens github links in the browser
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Mostly using it for better syntax highlighting
-" Plug 'ap/vim-css-color' " Preview colors in css files
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'nanotech/jellybeans.vim' " ColorScheme
-Plug 'davidgranstrom/nvim-markdown-preview'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Colors preview for hexcodes
+Plug 'davidgranstrom/nvim-markdown-preview' " Markdown preview and hot-reload
+Plug 'mhinz/vim-signify' " Git signs in sign column
+Plug 'numToStr/Comment.nvim' " easy comments 
+Plug 'kyazdani42/nvim-web-devicons' " For file icons
+Plug 'kyazdani42/nvim-tree.lua' " File tree structure
+Plug 'kylechui/nvim-surround' " Surrounds with quotation, brackets and tag
+Plug 'szw/vim-maximizer' " Maximize and minimize window
+Plug 'ackyshake/Spacegray.vim' " Space ColorScheme
+Plug 'EdenEast/nightfox.nvim' " nightfox ColorScheme
+Plug 'alvan/vim-closetag' " Auto close tags
+Plug 'anuvyklack/hydra.nvim' " Force custom mode
+Plug 'seblj/nvim-tabline' " Fancy tab bar
+Plug 'sindrets/winshift.nvim' " Move window around easily
+Plug 'liuchengxu/vista.vim' " Symbols ctags and more
 call plug#end()
+
+lua require('Comment').setup()
+lua require("nvim-surround").setup()
+lua require("lualine").setup()
+" lua require('treesitter-context').setup()

@@ -1,4 +1,5 @@
 nnoremap gq :CocSearch <C-r>+<cr>
+nnoremap <silent><leader>v :<C-u>CocOutline<cr>
 nnoremap <space>m :CocList marketplace<cr>
 
 "Coc-prettier config (Note: Vim-prettier is different)

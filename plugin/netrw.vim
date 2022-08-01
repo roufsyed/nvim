@@ -1,3 +1,4 @@
+autocmd FileType netrw setlocal signcolumn=no  " Disable signcolumn in netrw
 " Hide top banner
 let g:netrw_banner = 0 
 
