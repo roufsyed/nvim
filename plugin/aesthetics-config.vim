@@ -99,3 +99,14 @@ lua << EOF
       group = "_terminal",
     })
 EOF
+
+" Solution to the issue: where sometimes the window does not fullscreen properly
+lua << EOF
+    -- Redraw on start
+    vim.api.nvim_create_autocmd({ "VimEnter" }, {
+      callback = function()
+        local pid, WINCH = vim.fn.getpid(), vim.loop.constants.SIGWINCH
+        vim.defer_fn(function() vim.loop.kill(pid, WINCH) end, 20)
+      end
+    })
+EOF
