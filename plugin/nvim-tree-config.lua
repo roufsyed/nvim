@@ -1,5 +1,5 @@
 require("nvim-tree").setup({
-  open_on_setup = true,
+  open_on_setup = false,
   sync_root_with_cwd = true, -- use cd instead of lcd
   sort_by = "case_sensitive",
   view = {

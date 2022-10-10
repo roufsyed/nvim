@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 
 Hydra({
-	name = "Resize Window",
+	name = "resize window",
 	mode = { "n" },
 	body = "z",
 	config = {
@@ -17,25 +17,10 @@ Hydra({
     -- equalize window sizes
     { "e", "<C-w>=" },
 
-		-- window movement
-		{ "H", "<Cmd>WinShift left<CR>" },
-		{ "L", "<Cmd>WinShift right<CR>" },
-		{ "J", "<Cmd>WinShift down<CR>" },
-		{ "K", "<Cmd>WinShift up<CR>" },
+		-- rename tab (tabline plugin)
+    { "r", ":require('tabline.actions').set_tabname()<CR>" },
 
-    -- Tab rename and clear name
-		{ "tr", ":lua require('tabline.actions').set_tabname()<CR>" },
-		{ "tc", ":lua require('tabline.actions').clear_tabname()<CR>" },
-
-    -- buffer navigation
-    {"[", ":bn<CR>"},
-    {"]", ":bp<CR>"},
-
-    -- Tab navigations
-    {"}", ":tabnext<CR>"},
-    {"{", ":tabprevious<CR>"},
-
-		-- exit this Hydra
+		-- exit hydra mode
 		{ "q", nil, { exit = true, nowait = true } },
 		{ "<Esc>", nil, { exit = true, nowait = true } },
 		{ "<return>", nil, { exit = true, nowait = true } },

@@ -9,21 +9,12 @@
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --preview="bat --theme={jellybeans} --color always --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow'.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --preview="bat --theme={ansi} --color always --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow'.shellescape(<q-args>), 1, <bang>0)
 
 set timeoutlen=500 "Set timeout length to 500 ms
 
 " [[B]Commits] Customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>r :Rg<CR>
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>s :BLines<cr>
-nnoremap <leader>l :Lines<cr>
-nnoremap <leader>m :Marks<cr>
-nnoremap <leader>h :Maps<cr>
-nnoremap <leader>c :Commits<cr>
 
 " /* " Command	List */
 " /* " :Files [PATH]	Files (runs $FZF_DEFAULT_COMMAND if defined) */
@@ -50,3 +41,12 @@ nnoremap <leader>c :Commits<cr>
 " /* " :Maps	Normal mode mappings */
 " /* " :Helptags	Help tags 1 */
 " /* " :Filetypes	File types */
+
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>r :Rg<CR>
+nnoremap <leader>b :Windows<cr>
+nnoremap <leader><S-b> :Buffers<cr>
+nnoremap <leader>s :BLines<cr>
+nnoremap <leader>l :Lines<cr>
+nnoremap <leader>m :Marks<cr>
+nnoremap <leader>h :Maps<cr>
