@@ -4,7 +4,6 @@
 
 "remap to jj to esc and to get into normal mode in terminal
 imap jj <Esc>
-imap JJ <Esc>
 tnoremap jj <C-\><C-n>
 
 " Specific to toggleterm plugin
@@ -30,10 +29,10 @@ nnoremap <silent><leader>R :registers<CR>
 " Macros for adding, removing checklist, putting tick and removing it
 " [ ] testing
 let @a='^ca[jjx$' " Remove checkbox
-let @b='^ jj$'    " Add checkbox
+let @b='^i[ ] jj$'" Add checkbox
 let @c='^ci[✓jj$' " Tick checkbox
 let @d='^ci[ jj$' " Clear checkbox
-let @e='^ci[!jj$' " Partially done
+let @e='^ci[~jj$' " Partially done
 let @x='^ci[✕jj$' " Not done
 
 " Buffer navigations
@@ -92,6 +91,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Rename tab
+nnoremap RT :LualineRenameTab 
+
 " Git Shortcuts
 nnoremap <leader>gg  : Git<cr>
 nnoremap <leader>ga  : Git add %<cr>
@@ -116,11 +118,11 @@ nnoremap <leader>gb  : GBrowse<cr>
 " autocmd filetype kotlin     map <F2> :w<CR>:vsplit term://kotlinc % -include-runtime -d a.jar && java -jar a.jar<CR><C-w>L
 
 " ToggleTerm
-autocmd filetype java map       <F2> :w<CR>:2TermExec direction=float hide=1 cmd="javac % && java %:r"<CR>
-autocmd filetype cpp map        <F2> :w<CR>:2TermExec direction=float hide=1 cmd="g++ -std=c++14 % && ./a.out"<CR>
-autocmd filetype python map     <F2> :w<CR>:2TermExec direction=float hide=1 cmd="python3 %"<CR>
+autocmd filetype java       map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="javac % && java %:r"<CR>
+autocmd filetype cpp        map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="g++ -std=c++14 % && ./a.out"<CR>
+autocmd filetype python     map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="python3 %"<CR>
 autocmd filetype javascript map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="node %"<CR>
-autocmd filetype kotlin map     <F2> :w<CR>:2TermExec direction=float hide=1 cmd="kotlinc % -include-runtime -d a.jar && java -jar a.jar"<CR>
+autocmd filetype kotlin     map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="kotlinc % -include-runtime -d a.jar && java -jar a.jar"<CR>
 
 " Todo plugin hotkey
 nnoremap <leader>N :TodoQuickFix<CR>

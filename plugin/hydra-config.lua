@@ -17,9 +17,6 @@ Hydra({
     -- equalize window sizes
     { "e", "<C-w>=" },
 
-		-- rename tab (tabline plugin)
-    { "r", ":require('tabline.actions').set_tabname()<CR>" },
-
 		-- exit hydra mode
 		{ "q", nil, { exit = true, nowait = true } },
 		{ "<Esc>", nil, { exit = true, nowait = true } },

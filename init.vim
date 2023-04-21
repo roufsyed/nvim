@@ -9,7 +9,7 @@ set mouse=a               " Enable mouse for all modes
 set splitright            " Open split in right
 set clipboard=unnamedplus " Use system clipboard
 set signcolumn=yes        " Enable signcolumn for all the buffers
-set cmdheight=0           " Status line without command mode line
+set cmdheight=1           " Status line without command mode line
 set laststatus=3          " Enable status line and set it to be global for all splits
 set t_Co=256              " Enable true color
 set syntax=on             " Enable synatx highlighting
@@ -23,6 +23,7 @@ set noswapfile            " Disable swap files
 set scrolloff=8           " Doesn't allow cursor to go all the way to the last line
 set noshowmode            " Hides default mode display
 set cursorline            " Highlights cursor row
+" set showtabline=1       " disable tabline (useful when tabs are shown in statusline)
 
 " Cusorline config to hide it in inactive window
 augroup CursorLine 
@@ -97,13 +98,13 @@ Plug 'kyazdani42/nvim-tree.lua'                                                 
 Plug 'kylechui/nvim-surround'                                                                  " Surrounds with quotation, brackets and tags
 Plug 'anuvyklack/hydra.nvim'                                                                   " Custom mode
 Plug 'seblj/nvim-tabline'                                                                      " Fancy tab line
-Plug 'udalov/kotlin-vim'                                                                       " Kotlin syntax highlighting and autocompletion
 Plug 'puremourning/vimspector'                                                                 " Debugger - Jest, junit integration, etc
 Plug 'nvim-lua/plenary.nvim'                                                                   " Dependency of todo-comments and for UI Component designs
 Plug 'junegunn/vim-easy-align'                                                                 " expression alignment
 Plug 'folke/todo-comments.nvim'                                                                " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
 Plug 'nanotech/jellybeans.vim'                                                                 " Colorscheme
+Plug 'navarasu/onedark.nvim'
 call plug#end()
 
 "-------------------------------------------

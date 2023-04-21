@@ -18,12 +18,13 @@
 local lualine = require('lualine')
 
 -- Color table for highlights
--- stylua: ignore
 local colors = {
-  -- bg       = '#202328',
-  bg       = '#272727',
+  -- bg       = '#181A18',
+  -- bg       = '#272727',
+  bg       = '#16161e',
   fg       = '#bbc2cf',
-  yellow   = '#ECBE7B', cyan     = '#008080', 
+  yellow   = '#ECBE7B', 
+	cyan     = '#008080', 
 	darkblue = '#081633',
   green    = '#98be65',
   orange   = '#FF8800',
@@ -50,15 +51,20 @@ local conditions = {
 
 -- Config
 local config = {
+	
+	--
   options = {
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
+		always_divide_middle = false,
+		globalstatus = true,
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
+      normal = { c = { fg = colors.fg, bg = colors.bg },
+				y = { fg = colors.fg, bg = colors.bg } },
       inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
   },
@@ -66,20 +72,19 @@ local config = {
     -- these are to remove the defaults
     lualine_a = {},
     lualine_b = {},
-    lualine_y = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
     lualine_z = {},
-    -- These will be filled later
-    lualine_c = {},
-    lualine_x = {},
   },
   inactive_sections = {
     -- these are to remove the defaults
     lualine_a = {},
     lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
     lualine_y = {},
     lualine_z = {},
-    lualine_c = {},
-    lualine_x = {},
   },
 }
 
@@ -94,10 +99,19 @@ local function ins_right(component)
 end
 
 ins_left {
+	'mode',
+  color = { 
+		bg = colors.bg,
+		fg = colors.fg,
+		gui = '' 
+	},
+}
+
+ins_left {
   'branch',
   icon = '',
   color = { 
-		bg = '#303030',
+		bg = colors.bg,
 		fg = colors.fg,
 		gui = '' 
 	},
@@ -139,6 +153,21 @@ ins_left {
     return '%='
   end,
 }
+
+-- Tabs in status line
+-- ins_left {
+-- 	'tabs',
+-- 	colored=true,
+-- 	max_length = vim.o.columns / 1,
+-- 	mode = 2, -- 0: Shows tab_nr
+-- 						-- 1: Shows tab_name
+-- 						-- 2: Shows tab_nr + tab_name
+-- 	tabs_color = {
+-- 		-- Same values as the general color option can be used here.
+-- 		active = {fg = colors.magenta},
+-- 		inactive = {},
+-- 	},
+-- }
 
 ins_right { 'location' }
 

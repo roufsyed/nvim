@@ -1,6 +1,3 @@
-nnoremap gq :CocSearch <C-r>+<cr>
-" nnoremap <space>m :CocList marketplace<cr>
-
 "Coc-prettier config (Note: Vim-prettier is different)
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -52,7 +49,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
@@ -155,3 +152,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Coc Search
+nnoremap gq :CocSearch <C-r>+<cr>
+" Markerplace for plugins
+noremap <space>m :CocList marketplace<cr>
