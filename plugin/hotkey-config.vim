@@ -95,7 +95,7 @@ nnoremap <C-l> <C-w>l
 nnoremap RT :LualineRenameTab 
 
 " Git Shortcuts
-nnoremap <leader>gg  : Git<cr>
+nnoremap <leader>gg  : Git<cr>:only<cr>
 nnoremap <leader>ga  : Git add %<cr>
 nnoremap <leader>gc  : Git commit<cr>
 nnoremap <leader>gp  : Git push origin

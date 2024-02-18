@@ -105,7 +105,15 @@ Plug 'folke/todo-comments.nvim'                                                 
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
 Plug 'nanotech/jellybeans.vim'                                                                 " Colorscheme
 Plug 'navarasu/onedark.nvim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'vimwiki/vimwiki'
+" Java
+Plug 'mfussenegger/nvim-jdtls'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 call plug#end()
+
+
 
 "-------------------------------------------
 " Lua embedded calls
