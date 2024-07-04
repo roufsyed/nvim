@@ -5,6 +5,7 @@ set number                " Set number
 set termguicolors         " True color
 set rnu                   " Set relative number
 set wrap                  " Line wrapper
+set linebreak			  " Avoids splitting words in different lines
 set mouse=a               " Enable mouse for all modes
 set splitright            " Open split in right
 set clipboard=unnamedplus " Use system clipboard
