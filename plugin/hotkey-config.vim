@@ -61,6 +61,9 @@ endfunction
 nnoremap <silent><F8> :call Init()<cr>
 nnoremap ss :source %<CR>
 
+" Redo
+nnoremap U :redo<cr>
+
 "nvim-tree toggle
 nnoremap <silent><leader>e :NvimTreeToggle<cr>
 
