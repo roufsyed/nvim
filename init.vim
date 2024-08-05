@@ -90,8 +90,7 @@ Plug 'antoinemadec/FixCursorHold.nvim'                                          
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                                                " LSP
 Plug 'Raimondi/delimitMate'                                                                    " Quatation marks and brackets completion
 Plug 'tpope/vim-fugitive'                                                                      " Git inside the editor
-" Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }                                      " Colors preview for hexcodes
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown']}  " Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }              " Markdown preview
 Plug 'mhinz/vim-signify'                                                                       " Git signs in sign column
 Plug 'numToStr/Comment.nvim'                                                                   " Easy comments
 Plug 'kyazdani42/nvim-web-devicons'                                                            " Icons in editor
@@ -104,14 +103,14 @@ Plug 'nvim-lua/plenary.nvim'                                                    
 Plug 'junegunn/vim-easy-align'                                                                 " expression alignment
 Plug 'folke/todo-comments.nvim'                                                                " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
-Plug 'nanotech/jellybeans.vim'                                                                 " Colorscheme
 Plug 'navarasu/onedark.nvim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 " Java
 Plug 'mfussenegger/nvim-jdtls'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'														" Indent Guide Lines
 call plug#end()
 
 
@@ -122,5 +121,6 @@ call plug#end()
 lua << EOF
     require("Comment").setup()
     require("nvim-surround").setup()
-    require("todo-comments").setup ()
+    require("todo-comments").setup()
+	require("ibl").setup()
 EOF
