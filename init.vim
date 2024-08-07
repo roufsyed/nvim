@@ -58,8 +58,8 @@ set nowritebackup
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
-set textwidth=120 
-set noexpandtab " Expandtab uses spaces instead of tabs
+set textwidth=120
+set noexpandtab " Use tabs instead of spaces
 set smartindent
 set autoindent 
 set fileformat=unix
@@ -98,19 +98,21 @@ Plug 'kyazdani42/nvim-tree.lua'                                                 
 Plug 'kylechui/nvim-surround'                                                                  " Surrounds with quotation, brackets and tags
 Plug 'anuvyklack/hydra.nvim'                                                                   " Custom mode
 Plug 'seblj/nvim-tabline'                                                                      " Fancy tab line
-" Plug 'puremourning/vimspector'                                                                 " Debugger - Jest, junit integration, etc
 Plug 'nvim-lua/plenary.nvim'                                                                   " Dependency of todo-comments and for UI Component designs
 Plug 'junegunn/vim-easy-align'                                                                 " expression alignment
 Plug 'folke/todo-comments.nvim'                                                                " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
-Plug 'navarasu/onedark.nvim'
-Plug 'dhruvasagar/vim-table-mode'
+Plug 'navarasu/onedark.nvim'																   " Theme
+Plug 'dhruvasagar/vim-table-mode'																" Table rendering
 " Plug 'vimwiki/vimwiki'
 " Java
 Plug 'mfussenegger/nvim-jdtls'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'														" Indent Guide Lines
+Plug 'MeanderingProgrammer/render-markdown.nvim'												" Live markdown rendering
+Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 

@@ -70,7 +70,7 @@ nnoremap <silent><leader>e :NvimTreeToggle<cr>
 " opens a new tab
 nnoremap <silent><leader>t :tabnew<cr>
 nnoremap <silent><leader>v :vsp<cr>
-nnoremap <silent><leader>S :sp<cr>
+nnoremap <silent><leader>h :sp<cr>
 
 " Quickfix list: cnext, cprevious and copen
 nmap <Down> :cnext<cr>

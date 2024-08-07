@@ -98,16 +98,16 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
-ins_left {
-	'mode',
-  color = { 
-		bg = colors.bg,
-		fg = colors.fg,
-		gui = '' 
-	},
-}
+-- ins_left {
+-- 	'mode',
+--   color = { 
+-- 		bg = colors.bg,
+-- 		fg = colors.fg,
+-- 		gui = '' 
+-- 	},
+-- }
 
-ins_left {
+ins_right {
   'branch',
   icon = '',
   color = { 
@@ -123,7 +123,7 @@ ins_left {
   color = { fg = colors.fg, gui = '' },
 }
 
-ins_left {
+ins_right {
   'diff',
   -- Is it me or the symbol for modified us really weird
   symbols = { added = ' ', modified = '柳', removed = ' ' },
@@ -171,7 +171,7 @@ ins_left {
 
 ins_right { 'location' }
 
-ins_right { 'progress', color = { fg = colors.fg, gui = '' } }
+-- ins_right { 'progress', color = { fg = colors.fg, gui = '' } }
 
 ins_right {
   -- filesize component
@@ -188,12 +188,12 @@ ins_right {
   -- color = { fg = colors.green, gui = 'bold' },
 }
 
-ins_right {
-  'fileformat',
-  fmt = string.upper,
-  icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = colors.green, gui = 'bold' },
-}
+-- ins_right {
+--   'fileformat',
+--   fmt = string.upper,
+--   icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+--   color = { fg = colors.green, gui = 'bold' },
+-- }
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)

@@ -30,7 +30,7 @@ set background=dark
 
 lua << EOF
 	require('onedark').setup {
-		style = 'cool'
+		style = 'darker'
 	}
 	require('onedark').load()
 EOF

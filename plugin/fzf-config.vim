@@ -49,4 +49,4 @@ nnoremap <leader><S-b> :Buffers<cr>
 nnoremap <leader>s :BLines<cr>
 nnoremap <leader>l :Lines<cr>
 nnoremap <leader>m :Marks<cr>
-nnoremap <leader>h :Maps<cr>
+nnoremap <leader>M :Maps<cr>
