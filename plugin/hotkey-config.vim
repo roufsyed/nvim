@@ -133,3 +133,7 @@ nnoremap <leader>N :TodoQuickFix<CR>
 " Easy align plugin
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" Command mode next/previous 
+cnoremap <C-j> <Down>
+cnoremap <C-K> <Up>

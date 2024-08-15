@@ -26,6 +26,9 @@ set noshowmode            " Hides default mode display
 set cursorline            " Highlights cursor row
 " set showtabline=1       " disable tabline (useful when tabs are shown in statusline)
 
+"Remap leader 
+let mapleader = "," "map leader to coma 
+
 " Cusorline config to hide it in inactive window
 augroup CursorLine 
     au!
@@ -34,6 +37,21 @@ augroup CursorLine
     au BufWinEnter * setlocal cursorline
     au WinLeave * setlocal nocursorline
 augroup END
+
+" Some servers have issues with backup files, see #649.
+" so disabling backup files
+set nobackup
+set nowritebackup
+
+" Tab Config
+set tabstop=4 
+set softtabstop=4 
+set shiftwidth=4 
+set textwidth=100
+set noexpandtab " Use tabs instead of spaces
+set smartindent
+set autoindent 
+set fileformat=unix
 
 " Nvim built-in terminal config
 " augroup terminal_settings
@@ -49,33 +67,16 @@ augroup END
 "       \ endif
 " augroup END
 
-" Some servers have issues with backup files, see #649.
-" so disabling backup files
-set nobackup
-set nowritebackup
-
-" Tab Config
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4 
-set textwidth=120
-set noexpandtab " Use tabs instead of spaces
-set smartindent
-set autoindent 
-set fileformat=unix
 
 " Tab config specific to filetypes
-au BufNewFile,BufRead *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html,*.php,*.lua 
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-    \ set textwidth=120 |
-    \ set noexpandtab |
-    \ set autoindent |
-    \ set fileformat=unix
+" au BufNewFile,BufRead *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html,*.php,*.lua 
+"     \ set tabstop=2 |
+"     \ set softtabstop=2 |
+"     \ set shiftwidth=2 |
+"     \ set textwidth=120 |
+"     \ set noexpandtab |
+"     \ set autoindent |
 
-"Remap leader 
-let mapleader = "," "map leader to coma 
 
 "------------------------------------------------------------------------------
 " Plugins 
@@ -84,13 +85,14 @@ call plug#begin()
 Plug 'nvim-lualine/lualine.nvim'                                                               " Status line
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                            " Actual fzf program
 Plug 'junegunn/fzf.vim'                                                                        " Fuzzy file search for vim, prereq:fzf
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                    " For better syntax colors
 Plug 'lewis6991/impatient.nvim'                                                                " Improves startup time
 Plug 'antoinemadec/FixCursorHold.nvim'                                                         " Fix CursorHold Performance
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                                                " LSP
 Plug 'Raimondi/delimitMate'                                                                    " Quatation marks and brackets completion
 Plug 'tpope/vim-fugitive'                                                                      " Git inside the editor
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }              " Markdown preview
+Plug 'dhruvasagar/vim-table-mode'															   " Table rendering
+Plug 'MeanderingProgrammer/render-markdown.nvim'											   " Live markdown rendering
+Plug 'smithbm2316/centerpad.nvim'															   " Minimal center window
 Plug 'mhinz/vim-signify'                                                                       " Git signs in sign column
 Plug 'numToStr/Comment.nvim'                                                                   " Easy comments
 Plug 'kyazdani42/nvim-web-devicons'                                                            " Icons in editor
@@ -103,19 +105,12 @@ Plug 'junegunn/vim-easy-align'                                                  
 Plug 'folke/todo-comments.nvim'                                                                " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
 Plug 'navarasu/onedark.nvim'																   " Theme
-Plug 'dhruvasagar/vim-table-mode'																" Table rendering
-" Plug 'vimwiki/vimwiki'
-" Java
-Plug 'mfussenegger/nvim-jdtls'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'														" Indent Guide Lines
-Plug 'MeanderingProgrammer/render-markdown.nvim'												" Live markdown rendering
-Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
-Plug 'ryanoasis/vim-devicons'
+Plug 'lukas-reineke/indent-blankline.nvim'													   " Indent Guide Lines
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                    " For better syntax colors
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                                                " LSP
+Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }										   " Icons
+Plug 'ryanoasis/vim-devicons'																   " Icons
 call plug#end()
-
-
 
 "-------------------------------------------
 " Lua embedded calls
