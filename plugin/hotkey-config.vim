@@ -101,7 +101,7 @@ nnoremap RT :LualineRenameTab
 nnoremap <leader>gg  : Git<cr>:only<cr>
 nnoremap <leader>ga  : Git add %<cr>
 nnoremap <leader>gc  : Git commit<cr>
-nnoremap <leader>gp  : Git push origin
+nnoremap <leader>gp  : Git push origin master
 nnoremap <leader>gl  : Gclog<cr>
 nnoremap <leader>gd  : Git diff<cr>
 nnoremap <leader>gdv : Gvdiffsplit<cr><A-l>
