@@ -1,48 +1,79 @@
 {
-	//coc-prettier
-	// Currently these are the only languages supported
-	"coc.preferences.formatOnSaveFiletypes": [
-		"css",
-		"html",
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"json",
-		"graphql",
-		"java"
-	],
-	// coc-php
-	"intelephense.licenceKey": "your licence key",
-	//coc-java
-	"java.jdt.ls.java.home": "/usr/lib/jvm/java-11-openjdk-amd64/",
-	"java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/home/rouf/.config/coc/extensions/node_modules/coc-java-lombok/jar/lombok.jar\"",
-	"java.referencesCodeLens.enabled": true,
-	"suggest.completionItemKindLabels": {
-		"method": "  :Method",
-		"function": "  :Function",
-		"variable": "[]:variable",
-		"field": "  :Field",
-		"typeParameter": "<>:typeParameter",
-		"constant": "  :Constant",
-		"class": " פּ :Class",
-		"interface": " 蘒:Interface",
-		"struct": "   :Struct",
-		"event": " :Event",
-		"operator": "  :Operator",
-		"module": "  :Module",
-		"property": "  :Property",
-		"enum": " 練:enum",
-		"reference": "  :Reference",
-		"keyword": "  :Keyword",
-		"file": "  :File",
-		"folder": " ﱮ :Folder",
-		"color": "  :Color",
-		"unit": " 塞:Unit",
-		"snippet": "  :Snippet",
-		"text": "  :Text",
-		"constructor": "  :Constructor",
-		"value": "  :Value",
-		"enumMember": "  :enumMember"
-	}
+  //coc-prettier
+  // Currently these are the only languages supported
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "graphql",
+    "java"
+  ],
+  //coc-java
+  "java.jdt.ls.java.home": "/usr/lib/jvm/java-21-openjdk-amd64/",
+  "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/home/rouf/.config/coc/extensions/node_modules/coc-java-lombok/jar/lombok.jar\"",
+  "java.referencesCodeLens.enabled": true,
+  "suggest.completionItemKindLabels": {
+    "method": "  :Method",
+    "function": "  :Function",
+    "variable": "[]:variable",
+    "field": "  :Field",
+    "typeParameter": "<>:typeParameter",
+    "constant": "  :Constant",
+    "class": " פּ :Class",
+    "interface": " 蘒:Interface",
+    "struct": "   :Struct",
+    "event": " :Event",
+    "operator": "  :Operator",
+    "module": "  :Module",
+    "property": "  :Property",
+    "enum": " 練:enum",
+    "reference": "  :Reference",
+    "keyword": "  :Keyword",
+    "file": "  :File",
+    "folder": " ﱮ :Folder",
+    "color": "  :Color",
+    "unit": " 塞:Unit",
+    "snippet": "  :Snippet",
+    "text": "  :Text",
+    "constructor": "  :Constructor",
+    "value": "  :Value",
+    "enumMember": "  :enumMember"
+  },
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    },
+    "java": {
+      "command": "java-language-server",
+      "args": [
+        "-Xms1G",
+        "-Xmx2G",
+        "-XX:+UseG1GC",
+        "-XX:+UseStringDeduplication",
+        "-javaagent:/home/rouf/.config/coc/extensions/node_modules/coc-java-lombok/jar/lombok.jar"
+      ],
+      "filetypes": ["java"],
+      "rootPatterns": ["pom.xml", "build.gradle", ".git"],
+      "trace.server": "verbose"
+    },
+    "kotlin": {
+      "command": "kotlin-language-server",
+      "filetypes": ["kotlin"],
+      "rootPatterns": [
+        "settings.gradle",
+        "settings.gradle.kts",
+        "build.gradle",
+        "build.gradle.kts",
+        ".git"
+      ],
+      "trace.server": "verbose"
+    }
+  }
 }
