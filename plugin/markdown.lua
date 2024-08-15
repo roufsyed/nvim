@@ -14,7 +14,7 @@ require('render-markdown').setup({
 		width = 'block',
 		left_pad = 1,
 		right_pad = 1,
-		min_width = 100,
+		min_width = 120,
 	},
 	checkbox = {
 		enabled = true,
