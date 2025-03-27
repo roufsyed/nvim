@@ -118,6 +118,14 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'neovim/nvim-lspconfig' " LSP configurations
 Plug 'williamboman/mason.nvim' " LSP Installer
 Plug 'williamboman/mason-lspconfig.nvim' " Bridge between Mason and LSPConfig
+
+Plug 'hrsh7th/nvim-cmp'          " Completion engine
+Plug 'hrsh7th/cmp-nvim-lsp'      " LSP source for nvim-cmp
+Plug 'hrsh7th/cmp-buffer'        " Buffer completion
+Plug 'hrsh7th/cmp-path'          " Path completion
+Plug 'hrsh7th/cmp-cmdline'       " Command-line completion
+Plug 'saadparwaiz1/cmp_luasnip'  " Snippet completion
+Plug 'L3MON4D3/LuaSnip'          " Snippet engine
 call plug#end()
 
 "-------------------------------------------
