@@ -10,8 +10,8 @@ set mouse=a               " Enable mouse for all modes
 set splitright            " Open split in right
 set clipboard=unnamedplus " Use system clipboard
 set signcolumn=yes        " Enable signcolumn for all the buffers
-set cmdheight=1           " Status line without command mode line
-set laststatus=1          " Enable status line and set it to be global for all splits
+set cmdheight=0           " Status line without command mode line
+set laststatus=3          " Enable status line and set it to be global for all splits
 set t_Co=256              " Enable true color
 set syntax=on             " Enable synatx highlighting
 set hlsearch              " Highlight all search results
@@ -105,12 +105,14 @@ Plug 'junegunn/vim-easy-align'                                                  
 Plug 'folke/todo-comments.nvim'                                                                " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
 Plug 'navarasu/onedark.nvim'																   " Theme
+Plug 'lurst/austere.vim'																	   " Theme
 Plug 'lukas-reineke/indent-blankline.nvim'													   " Indent Guide Lines
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                    " For better syntax colors
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}                                                " LSP
 Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }										   " Icons
 Plug 'ryanoasis/vim-devicons'																   " Icons
 Plug 'easymotion/vim-easymotion'															   " navigations
+Plug 'norcalli/nvim-colorizer.lua'															   " Hex Colors Preview
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
@@ -126,6 +128,7 @@ Plug 'hrsh7th/cmp-path'          " Path completion
 Plug 'hrsh7th/cmp-cmdline'       " Command-line completion
 Plug 'saadparwaiz1/cmp_luasnip'  " Snippet completion
 Plug 'L3MON4D3/LuaSnip'          " Snippet engine
+Plug 'simrat39/symbols-outline.nvim'
 call plug#end()
 
 "-------------------------------------------
@@ -135,4 +138,10 @@ lua << EOF
     require("Comment").setup()
     require("nvim-surround").setup()
     require("todo-comments").setup()
+	require("symbols-outline").setup()
+	require("colorizer").setup {
+	  'css';
+	  'javascript';
+	  'lua';
+}
 EOF
