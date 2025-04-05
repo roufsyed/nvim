@@ -1,8 +1,8 @@
 require('render-markdown').setup({
-	max_file_size = 100,		
+	max_file_size = 100,
 	heading = {
 		enabled = false,
-		sign = fasle,
+		sign = false,
 		position = 'inline',
 		icons = {''},
 		signs = {''},

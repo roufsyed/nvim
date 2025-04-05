@@ -51,8 +51,6 @@ local conditions = {
 
 -- Config
 local config = {
-	
-	--
   options = {
     -- Disable sections and component separators
     component_separators = '',
@@ -71,18 +69,18 @@ local config = {
   sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {},  -- Show filename in active splits
+    lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {},
+    lualine_z = {'branch'},
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {},  -- Show filename in inactive splits too
+    lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {},
+    lualine_z = {'branch'},
   },
 	extensions = {'quickfix', 'toggleterm','fugitive','nvim-tree'},
 }
@@ -103,6 +101,45 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
   table.insert(config.inactive_sections.lualine_x, component)  -- Inactive statusline
 end
+
+
+-- Insert mid section. You can make any number of sections in neovim :)
+-- for lualine it's any number greater then 2
+ins_left {
+  function()
+    return '%='
+  end,
+}
+
+ins_right {
+  'diff',
+  -- Is it me or the symbol for modified us really weird
+  symbols = { added = '+', modified = '~', removed = '-' },
+  diff_color = {
+    added = { fg = colors.green },
+    modified = { fg = colors.orange },
+    removed = { fg = colors.red },
+  },
+  cond = conditions.hide_in_width,
+}
+
+ins_right {
+  -- filesize component
+  'filesize',
+  cond = conditions.buffer_not_empty,
+}
+
+-- ins_right {
+--   'branch',
+--   icon = '',
+--   color = { 
+-- 		bg = colors.bg,
+-- 		fg = colors.yellow,
+-- 		gui = '',
+-- 	},
+-- }
+
+-- ins_right { 'location' }
 
 -- ins_left {
 -- 	'mode',
@@ -137,13 +174,16 @@ end
 --   },
 -- }
 
--- Insert mid section. You can make any number of sections in neovim :)
--- for lualine it's any number greater then 2
-ins_left {
-  function()
-    return '%='
-  end,
-}
+-- Add components to right sections
+-- ins_right {
+--   'o:encoding', -- option component same as &encoding in viml
+--   fmt = string.upper, -- I'm not sure why it's upper case either ;)
+--   cond = conditions.hide_in_width,
+--   color = { fg = colors.green, gui = '' },
+--   color = { fg = colors.green, gui = 'bold' },
+-- }
+
+
 
 -- Tabs in status line
 -- ins_left {
@@ -160,46 +200,6 @@ ins_left {
 -- 	},
 -- }
 
-ins_right {
-  'diff',
-  -- Is it me or the symbol for modified us really weird
-  symbols = { added = '+', modified = '~', removed = '-' },
-  diff_color = {
-    added = { fg = colors.green },
-    modified = { fg = colors.orange },
-    removed = { fg = colors.red },
-  },
-  cond = conditions.hide_in_width,
-}
-
-ins_right {
-  -- filesize component
-  'filesize',
-  cond = conditions.buffer_not_empty,
-}
-
--- Add components to right sections
--- ins_right {
---   'o:encoding', -- option component same as &encoding in viml
---   fmt = string.upper, -- I'm not sure why it's upper case either ;)
---   cond = conditions.hide_in_width,
---   color = { fg = colors.green, gui = '' },
---   color = { fg = colors.green, gui = 'bold' },
--- }
-
-
-ins_right { 'location' }
-
-ins_right {
-  'branch',
-  icon = '',
-  color = { 
-		bg = colors.bg,
-		fg = colors.fg,
-		gui = '',
-	},
-}
-
 -- ins_right {
 --   'fileformat',
 --   fmt = string.upper,
@@ -210,4 +210,3 @@ ins_right {
 -- ins_right { 'progress', color = { fg = colors.fg, gui = '' } }
 
 lualine.setup(config)
-

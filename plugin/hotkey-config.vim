@@ -96,10 +96,10 @@ nnoremap <silent><leader>v :vsp<cr>
 nnoremap <silent><leader>h :sp<cr>
 
 " Quickfix list: cnext, cprevious and copen
-nmap <Down> :cnext<cr>
-nmap <Up> :cprevious<cr>
-nmap <left> :cclose<cr>
-nmap <right> :copen<cr>
+nmap }} :cnext<cr>
+nmap {{ :cprevious<cr>
+nmap q :cclose<cr>
+nmap Q :copen<cr>
 
 "Move texts around
 vnoremap J :m '>+1<CR>gv=gv
@@ -168,3 +168,119 @@ nmap <leader>,, <Plug>(easymotion-overwin-f2)
 
 " Find in File explorer
 nmap <F1> :NvimTreeFindFileToggle<CR>
+
+
+nnoremap gs :SymbolsOutline<cr>
+
+
+lua << EOF
+-- Telescope keymap
+local builtin = require("telescope.builtin")
+local opts = { noremap = true, silent = true }
+
+-- 🔹 Find files & general Telescope mappings
+vim.keymap.set('n', '<Space><Space>', builtin.builtin, opts)
+vim.keymap.set('n', '<leader>f', function()
+  require('telescope.builtin').find_files({
+    previewer = false,
+    layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.4,
+      height = 0.4,
+    },
+  })
+end, opts)
+
+vim.keymap.set('n', '<leader>r', builtin.live_grep, opts)
+
+vim.keymap.set('n', '<leader>b', function()
+  require('telescope.builtin').buffers({
+    previewer = false,
+    layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.4,
+      height = 0.4,
+    },
+  })
+end, opts)
+
+vim.keymap.set('n', '<leader><Tab>', builtin.oldfiles, opts)
+vim.keymap.set('n', '<leader>gt', builtin.treesitter, opts)
+vim.keymap.set('n', '<leader>c', builtin.commands, opts)
+vim.keymap.set('n', '<leader>j', builtin.jumplist, opts)
+vim.keymap.set('n', '<leader>m', builtin.marks, opts)
+vim.keymap.set('n', '<leader>M', builtin.keymaps, opts)
+vim.keymap.set('n', '<leader>H', builtin.help_tags, opts)
+
+-- 🔹 LSP Pickers (Direct Keybindings)
+vim.keymap.set("n", "gR", function() builtin.lsp_references() end, opts)
+vim.keymap.set("n", "<leader>ld", function() builtin.lsp_document_symbols() end, opts)
+vim.keymap.set("n", "<leader>lw", function() builtin.lsp_workspace_symbols() end, opts)
+vim.keymap.set("n", "<leader>ls", function() builtin.lsp_dynamic_workspace_symbols() end, opts)
+vim.keymap.set("n", "<leader>lI", function() builtin.lsp_implementations() end, opts)
+
+-- 🔹 LSP Diagnostics (Handled Separately)
+vim.keymap.set("n", "<leader>lx", function() builtin.diagnostics({ bufnr = 0 }) end, opts)  -- Current buffer diagnostics
+vim.keymap.set("n", "<leader>P", builtin.diagnostics, opts)  -- All buffers diagnostics
+
+-- grep selected text
+vim.keymap.set("v", "<leader>r", function()
+    vim.cmd('normal! "zy') -- Copy selection to register z
+    local selected_text = vim.fn.getreg("z") -- Get selected text
+    selected_text = selected_text:gsub("([%(%)%.%+%-%*%?%[%]%^%$])", "\\%1") -- Escape only regex special characters for Ripgrep
+    selected_text = selected_text:gsub("\n", " ") -- Convert newlines to spaces (Fix for multi-line selection)
+
+    builtin.live_grep({ default_text = selected_text })
+end, { noremap = true, silent = true })
+
+
+
+-- LSP keymap
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(event)
+    local opts = { noremap = true, silent = true, buffer = bufnr }
+
+    -- TypeScript: Organize Imports
+    vim.keymap.set("n", "<Space>oi", function()
+        local params = {
+            command = "_typescript.organizeImports",
+            arguments = { vim.api.nvim_buf_get_name(0) },
+        }
+        vim.lsp.buf.execute_command(params)
+    end, opts)
+
+    -- Navigation
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<Space>D", vim.lsp.buf.type_definition, opts)
+
+    -- Hover / Signature
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<Space>k", vim.lsp.buf.signature_help, opts)
+
+    -- Code Actions / Rename
+    vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, opts)
+
+    -- Diagnostics
+    vim.keymap.set("n", "[[", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "]]", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "<leader>p", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "<leader>Q", vim.diagnostic.setloclist, opts)
+
+    -- Formatting
+    vim.keymap.set("n", "<Space>f", function()
+        vim.lsp.buf.format { async = true }
+    end, opts)
+
+    -- Inlay Hints Toggle (if supported)
+    if vim.lsp.inlay_hint then
+        vim.keymap.set("n", "<leader>ih", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end, opts)
+    end
+end,
+})
+
+EOF
