@@ -11,6 +11,7 @@ set background=dark
 " colorscheme base16-catppuccin
 " colorscheme jellybeans
 " colorscheme quiet
+" colorscheme austere
 
 " lua << EOF
 " 	require("tokyonight").setup({
@@ -81,6 +82,7 @@ let &t_EI = "\e[2 q" "Normal mode
 " NOTE: highlight should be kept on last line always to overide whatever is set by the colorscheme
 " ---------------------------------------------------------------
 highlight WinSeparator guifg=#FFFFFF guibg=NONE ctermbg=NONE ctermfg=NONE " To make window separator none, a line will be used.
+highlight CursorLine ctermbg=236 guibg=#2E333D
 " highlight TabLineSel guifg=#a9b665 guibg=#00000000 gui=bold
 " highlight TabLine guifg=#bbc2cf guibg=#272727 gui=none
 " highlight TabLineFill guibg=#272727
@@ -130,4 +132,5 @@ lua << EOF
         vim.defer_fn(function() vim.loop.kill(pid, WINCH) end, 20)
       end
     })
+
 EOF
