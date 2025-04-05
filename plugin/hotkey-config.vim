@@ -27,7 +27,7 @@ nnoremap <C-a> ggVG
 nnoremap X Vx
 
 " Register
-nnoremap <silent><leader>R :registers<CR>
+nnoremap <silent><leader>R :Telescope registers<CR>
 
 " Macros for adding, removing checklist, putting tick and removing it
 " [ ] testing
@@ -57,6 +57,23 @@ nnoremap <leader>q :q<CR>
 " c : confirm before deleting
 " g : global edit
 nnoremap <leader>sr :%s/<C-r>+//gc
+
+" Search for selected text
+vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap # y?\V<C-R>=escape(@",'/\')<CR><CR>
+"
+" Project-wide search (similar to IntelliJ's Cmd+Shift+F)
+function! ProjectSearch()
+  let pattern = input("Search project for: ")
+  if pattern != ""
+    " You can replace 'grep' with 'rg' (ripgrep) or 'ag' (silver searcher) if installed
+    execute 'silent grep! "' . pattern . '" .'
+    copen  " Open the quickfix window with results
+  endif
+endfunction
+
+" Map it to your preferred key combination
+nnoremap <leader>F :call ProjectSearch()<CR>
 
 "to open init and source
 function! Init()
@@ -145,7 +162,9 @@ cnoremap <C-j> <Down>
 cnoremap <C-K> <Up>
 
 " Easy Motion
-nmap <leader><space> <Plug>(easymotion-overwin-f2)
+let g:EasyMotion_smartcase = 1  " Case insensitive unless uppercase is used
+let g:EasyMotion_use_smartsign_us = 1 " Smarter character matching
+nmap <leader>,, <Plug>(easymotion-overwin-f2)
 
 " Find in File explorer
 nmap <F1> :NvimTreeFindFileToggle<CR>
