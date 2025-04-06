@@ -221,7 +221,6 @@ vim.keymap.set("n", "<leader>lI", function() builtin.lsp_implementations() end, 
 
 -- 🔹 LSP Diagnostics (Handled Separately)
 vim.keymap.set("n", "<leader>lx", function() builtin.diagnostics({ bufnr = 0 }) end, opts)  -- Current buffer diagnostics
-vim.keymap.set("n", "<leader>P", builtin.diagnostics, opts)  -- All buffers diagnostics
 
 -- grep selected text
 vim.keymap.set("v", "<leader>r", function()
@@ -251,7 +250,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Navigation
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "<Space>D", vim.lsp.buf.type_definition, opts)
 
@@ -260,8 +259,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<Space>k", vim.lsp.buf.signature_help, opts)
 
     -- Code Actions / Rename
-    vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, opts)
+    -- vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<Space>r", vim.lsp.buf.rename, opts)
 
     -- Diagnostics
     vim.keymap.set("n", "[[", vim.diagnostic.goto_prev, opts)
@@ -270,7 +269,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>Q", vim.diagnostic.setloclist, opts)
 
     -- Formatting
-    vim.keymap.set("n", "<Space>f", function()
+	vim.keymap.set("n", "<Space>f", function()
         vim.lsp.buf.format { async = true }
     end, opts)
 
@@ -282,5 +281,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 end,
 })
+
+
+-- Trouble
+-- Open Trouble with diagnostics
+vim.keymap.set("n", "<leader>P", function()
+  require("trouble").open("diagnostics")
+end, { noremap = true, silent = true })
+
+-- Open Trouble with symbols
+vim.keymap.set("n", "<leader>S", function()
+  require("trouble").open("symbols")
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "gr", function()
+  require("trouble").open("lsp_references")
+end, { noremap = true, silent = true })
+
+
+-- Code Runner
+vim.keymap.set('n', '<F10>', ':RunCode<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false })
+
+
+-- code Action Preview 
+vim.keymap.set({ "v", "n" }, "<leader>a", require("actions-preview").code_actions)
+
+
+-- Competitive Coding test run
+vim.keymap.set("n", "<F4>", "<cmd>CompetiTest run<CR>", { desc = "Run Competitest testcases" })
+vim.keymap.set("n", "<F5>", "<cmd>CompetiTest add_testcase<CR>", { desc = "Add new Competitest testcase" })
+vim.keymap.set("n", "<F6>", "<cmd>CompetiTest edit_testcase<CR>", { desc = "Edit Competitest testcase" })
 
 EOF

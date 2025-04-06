@@ -56,7 +56,7 @@ local config = {
     component_separators = '',
     section_separators = '',
 		always_divide_middle = false,
-		globalstatus = false,
+		globalstatus = true,
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we

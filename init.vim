@@ -11,7 +11,7 @@ set splitright            " Open split in right
 set clipboard=unnamedplus " Use system clipboard
 set signcolumn=yes        " Enable signcolumn for all the buffers
 set cmdheight=0           " Status line without command mode line
-set laststatus=3          " Enable status line and set it to be global for all splits
+set laststatus=3          " Enable status line and set it to be global for all splits / Getting override in lualine config
 set t_Co=256              " Enable true color
 set syntax=on             " Enable synatx highlighting
 set hlsearch              " Highlight all search results
@@ -108,19 +108,16 @@ Plug 'navarasu/onedark.nvim'																   " Theme
 Plug 'lurst/austere.vim'																	   " Theme
 Plug 'lukas-reineke/indent-blankline.nvim'													   " Indent Guide Lines
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                    " For better syntax colors
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}                                                " LSP
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}                                              " LSP
 Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }										   " Icons
 Plug 'ryanoasis/vim-devicons'																   " Icons
 Plug 'easymotion/vim-easymotion'															   " navigations
 Plug 'norcalli/nvim-colorizer.lua'															   " Hex Colors Preview
-
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-
 Plug 'neovim/nvim-lspconfig' " LSP configurations
 Plug 'williamboman/mason.nvim' " LSP Installer
 Plug 'williamboman/mason-lspconfig.nvim' " Bridge between Mason and LSPConfig
-
 Plug 'hrsh7th/nvim-cmp'          " Completion engine
 Plug 'hrsh7th/cmp-nvim-lsp'      " LSP source for nvim-cmp
 Plug 'hrsh7th/cmp-buffer'        " Buffer completion
@@ -129,6 +126,17 @@ Plug 'hrsh7th/cmp-cmdline'       " Command-line completion
 Plug 'saadparwaiz1/cmp_luasnip'  " Snippet completion
 Plug 'L3MON4D3/LuaSnip'          " Snippet engine
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'j-hui/fidget.nvim'
+Plug 'f-person/git-blame.nvim'
+Plug 'wsdjeg/rooter.nvim'
+Plug 'CRAG666/code_runner.nvim'
+Plug 'ThePrimeagen/refactoring.nvim'
+Plug 'aznhe21/actions-preview.nvim'
+Plug 'mfussenegger/nvim-jdtls'
+Plug 'MunifTanjim/nui.nvim'        " Dependency for competitest
+Plug 'xeluxee/competitest.nvim'
 call plug#end()
 
 "-------------------------------------------
@@ -143,5 +151,6 @@ lua << EOF
 	  'css';
 	  'javascript';
 	  'lua';
-}
+	}
+	require('refactoring').setup({})
 EOF
