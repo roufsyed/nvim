@@ -1,3 +1,3 @@
 require('gitblame').setup {
-    enabled = false,
+	enabled = false,
 }

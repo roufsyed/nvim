@@ -4,13 +4,14 @@
 set number                " Set number
 set termguicolors         " True color
 set rnu                   " Set relative number
-set nowrap                " Line wrapper
-set linebreak			  " Avoids splitting words in different lines
+set wrap                " Line wrapper set linebreak		
+set linebreak         " wrap at word boundaries, not mid-word
+set showbreak=↪\      " optional: shows indicator at wrapped lines
 set mouse=a               " Enable mouse for all modes
 set splitright            " Open split in right
 set clipboard=unnamedplus " Use system clipboard
 set signcolumn=yes        " Enable signcolumn for all the buffers
-set cmdheight=0           " Status line without command mode line
+set cmdheight=1           " Status line without command mode line
 set laststatus=3          " Enable status line and set it to be global for all splits / Getting override in lualine config
 set t_Co=256              " Enable true color
 set syntax=on             " Enable synatx highlighting
@@ -21,7 +22,8 @@ set incsearch             " Searches for strings incrementally
 set hidden                " Keeps buffer open in the background without saving it
 set noerrorbells          " Turns off bell sound
 set noswapfile            " Disable swap files
-set scrolloff=8           " Doesn't allow cursor to go all the way to the last line
+set scrolloff=0         
+set scrolljump=1
 set noshowmode            " Hides default mode display
 set cursorline            " Highlights cursor row
 " set showtabline=1       " disable tabline (useful when tabs are shown in statusline)
@@ -47,7 +49,7 @@ set nowritebackup
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
-set textwidth=100
+set textwidth=0
 set noexpandtab " Use tabs instead of spaces
 set smartindent
 set autoindent 
@@ -82,61 +84,56 @@ set fileformat=unix
 " Plugins 
 "------------------------------------------------------------------------------
 call plug#begin()
-Plug 'nvim-lualine/lualine.nvim'                                                               " Status line
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                                            " Actual fzf program
-Plug 'junegunn/fzf.vim'                                                                        " Fuzzy file search for vim, prereq:fzf
-Plug 'lewis6991/impatient.nvim'                                                                " Improves startup time
-Plug 'antoinemadec/FixCursorHold.nvim'                                                         " Fix CursorHold Performance
-Plug 'Raimondi/delimitMate'                                                                    " Quatation marks and brackets completion
-Plug 'tpope/vim-fugitive'                                                                      " Git inside the editor
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }              " Markdown preview
-Plug 'dhruvasagar/vim-table-mode'															   " Table rendering
-Plug 'MeanderingProgrammer/render-markdown.nvim'											   " Live markdown rendering
-Plug 'smithbm2316/centerpad.nvim'															   " Minimal center window
-Plug 'mhinz/vim-signify'                                                                       " Git signs in sign column
-Plug 'numToStr/Comment.nvim'                                                                   " Easy comments
-Plug 'kyazdani42/nvim-web-devicons'                                                            " Icons in editor
-Plug 'kyazdani42/nvim-tree.lua'                                                                " File tree structure
-Plug 'kylechui/nvim-surround'                                                                  " Surrounds with quotation, brackets and tags
-Plug 'anuvyklack/hydra.nvim'                                                                   " Custom mode
-Plug 'seblj/nvim-tabline'                                                                      " Fancy tab line
-Plug 'nvim-lua/plenary.nvim'                                                                   " Dependency of todo-comments and for UI Component designs
-Plug 'junegunn/vim-easy-align'                                                                 " expression alignment
-Plug 'folke/todo-comments.nvim'                                                                " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
-Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}                                                  " Terminal
-Plug 'navarasu/onedark.nvim'																   " Theme
-Plug 'lurst/austere.vim'																	   " Theme
-Plug 'lukas-reineke/indent-blankline.nvim'													   " Indent Guide Lines
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                                    " For better syntax colors
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}                                              " LSP
-Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }										   " Icons
-Plug 'ryanoasis/vim-devicons'																   " Icons
-Plug 'easymotion/vim-easymotion'															   " navigations
-Plug 'norcalli/nvim-colorizer.lua'															   " Hex Colors Preview
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-Plug 'neovim/nvim-lspconfig' " LSP configurations
-Plug 'williamboman/mason.nvim' " LSP Installer
-Plug 'williamboman/mason-lspconfig.nvim' " Bridge between Mason and LSPConfig
-Plug 'hrsh7th/nvim-cmp'          " Completion engine
-Plug 'hrsh7th/cmp-nvim-lsp'      " LSP source for nvim-cmp
-Plug 'hrsh7th/cmp-buffer'        " Buffer completion
-Plug 'hrsh7th/cmp-path'          " Path completion
-Plug 'hrsh7th/cmp-cmdline'       " Command-line completion
-Plug 'saadparwaiz1/cmp_luasnip'  " Snippet completion
-Plug 'L3MON4D3/LuaSnip'          " Snippet engine
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'folke/trouble.nvim'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'j-hui/fidget.nvim'
-Plug 'f-person/git-blame.nvim'
-Plug 'wsdjeg/rooter.nvim'
-Plug 'CRAG666/code_runner.nvim'
-Plug 'ThePrimeagen/refactoring.nvim'
-Plug 'aznhe21/actions-preview.nvim'
-Plug 'mfussenegger/nvim-jdtls'
-Plug 'MunifTanjim/nui.nvim'        " Dependency for competitest
-Plug 'xeluxee/competitest.nvim'
+Plug 'nvim-lualine/lualine.nvim'                                  " Status line
+Plug 'windwp/nvim-autopairs'
+Plug 'tpope/vim-fugitive'                                         " Git
+Plug 'sindrets/diffview.nvim'									  " Git diff
+Plug 'f-person/git-blame.nvim'                                    " Blame
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'rmagatti/auto-session'                                      " Session
+Plug 'nvim-pack/nvim-spectre'                                     " Search and replace
+Plug 'dhruvasagar/vim-table-mode'                                 " Table rendering
+Plug 'MeanderingProgrammer/render-markdown.nvim'                  " Live markdown rendering
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug '3rd/image.nvim'											  " Image rendering
+Plug 'numToStr/Comment.nvim'                                      " Easy comments
+Plug 'kyazdani42/nvim-web-devicons'                               " Icons in editor
+Plug 'stevearc/oil.nvim'										  " File tree structure
+" Plug 'refractalize/oil-git-status.nvim'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'kylechui/nvim-surround'                                     " Surrounds with quotation, brackets and tags
+Plug 'nvimtools/hydra.nvim'                                      " Custom mode
+Plug 'seblj/nvim-tabline'                                         " Fancy tab line
+Plug 'nvim-lua/plenary.nvim'                                      " Dependency of todo-comments, telescope and for UI Component designs
+Plug 'junegunn/vim-easy-align'                                    " expression alignment
+Plug 'folke/todo-comments.nvim'                                   " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
+Plug 'navarasu/onedark.nvim'                                      " Theme
+Plug 'huyvohcmc/atlas.vim'										  " Theme
+Plug 'lukas-reineke/indent-blankline.nvim'                        " Indent Guide Lines
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': 'main', 'do': ':TSUpdate'} " For better syntax colors
+Plug 'folke/flash.nvim'											  " Jump navigation
+Plug 'catgoose/nvim-colorizer.lua'                                " Hex Colors Preview (norcalli's is dead since 2021)
+Plug 'nvim-telescope/telescope.nvim'                              " Fuzzy search
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Fuzzy fzf
+Plug 'neovim/nvim-lspconfig'                                      " LSP configurations
+Plug 'williamboman/mason.nvim'                                    " LSP Installer
+Plug 'williamboman/mason-lspconfig.nvim'                          " Mason configs wrapper
+Plug 'j-hui/fidget.nvim'                                          " LSP progress
+Plug 'hrsh7th/nvim-cmp'                                           " Completion engine
+Plug 'hrsh7th/cmp-nvim-lsp'                                       " LSP source for nvim-cmp
+Plug 'hrsh7th/cmp-buffer'                                         " Buffer completion
+Plug 'hrsh7th/cmp-path'                                           " Path completion
+Plug 'hrsh7th/cmp-cmdline'                                        " Command-line completion
+Plug 'saadparwaiz1/cmp_luasnip'                                   " Snippet completion
+Plug 'L3MON4D3/LuaSnip'                                           " Snippet engine
+Plug 'hedyhli/outline.nvim'										  " Outline symbols list view
+Plug 'folke/trouble.nvim'                                         " Diagnostic in quickfix
+Plug 'lewis6991/async.nvim'                                       " Dependency of refactoring.nvim
+Plug 'ThePrimeagen/refactoring.nvim'                              " Extract to method, etc
+Plug 'aznhe21/actions-preview.nvim'                               " Code action in pop up with preview
+Plug 'BranimirE/fix-auto-scroll.nvim'							  " Fix auto scroll to middle of the editor on split change
+Plug 'nvimtools/none-ls.nvim'
+Plug 'rcarriga/nvim-notify'
 call plug#end()
 
 "-------------------------------------------
@@ -146,11 +143,6 @@ lua << EOF
     require("Comment").setup()
     require("nvim-surround").setup()
     require("todo-comments").setup()
-	require("symbols-outline").setup()
-	require("colorizer").setup {
-	  'css';
-	  'javascript';
-	  'lua';
-	}
-	require('refactoring').setup({})
+	require('refactoring').setup()
+	require("outline").setup()
 EOF

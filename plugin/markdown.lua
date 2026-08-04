@@ -8,7 +8,7 @@ require('render-markdown').setup({
 		signs = {''},
 	},
 	code = {
-		enable = true,
+		enabled = true,
 		sign = false,
 		style = 'normal',
 		width = 'block',
@@ -46,7 +46,6 @@ require('render-markdown').setup({
 			},
 			head = 'RenderMarkdownTableHead',
 			row = 'RenderMarkdownTableRow',
-			filler = 'RenderMarkdownTableFill',
     },
 		link = {
 			enabled = true,

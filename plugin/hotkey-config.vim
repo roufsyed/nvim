@@ -1,4 +1,4 @@
-"-----------------------------------------------------------------------------------------------------------------------------------------------
+"----------------------------------------------------------------------------------------------------------------------------------------------
 "Hotkey configurations
 "-----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -7,8 +7,8 @@ imap jj <Esc>
 tnoremap jj <C-\><C-n>
 
 " Specific to toggleterm plugin
-nmap <silent><leader>T :ToggleTerm direction=horizontal size=12 hide=1<CR>
-tnoremap <silent><leader>T :ToggleTerm hide<CR>
+" nmap <silent><leader>T :ToggleTerm direction=horizontal size=12 hide=1<CR>
+" tnoremap <silent><leader>T :ToggleTerm hide<CR>
 
 "Toggle vertical and horizontal built-in terminal
  " nmap <silent><F4> :split term://bash<CR>jj<C-w>L:vertical resize 60<CR>iclear<CR>
@@ -25,9 +25,7 @@ nnoremap <C-a> ggVG
 
 " Delete line 
 nnoremap X Vx
-
-" Register
-nnoremap <silent><leader>R :Telescope registers<CR>
+nnoremap C Vy
 
 " Macros for adding, removing checklist, putting tick and removing it
 " [ ] testing
@@ -59,8 +57,19 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>sr :%s/<C-r>+//gc
 
 " Search for selected text
-vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
-vnoremap # y?\V<C-R>=escape(@",'/\')<CR><CR>
+" vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
+" vnoremap # y?\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap s y:let @/ = escape(@", '/\')<CR>:set hlsearch<CR>
+nnoremap s :call SearchWithoutJump()<CR>
+
+function! SearchWithoutJump()
+  let l:search = input('/')
+  if !empty(l:search)
+    let @/ = escape(l:search, '/\')
+    set hlsearch
+  endif
+endfunction
+
 "
 " Project-wide search (similar to IntelliJ's Cmd+Shift+F)
 function! ProjectSearch()
@@ -72,8 +81,8 @@ function! ProjectSearch()
   endif
 endfunction
 
-" Map it to your preferred key combination
-nnoremap <leader>F :call ProjectSearch()<CR>
+" Ripgrep and through result in quickfix list
+" nnoremap <leader>F :call ProjectSearch()<CR>
 
 "to open init and source
 function! Init()
@@ -87,8 +96,10 @@ nnoremap ss :source %<CR>
 " Redo
 nnoremap U :redo<cr>
 
-"nvim-tree toggle
-nnoremap <silent><leader>e :NvimTreeToggle<cr>
+" Oil : File explorer
+" nnoremap <silent><leader>e :OilSidebar<cr>
+" nnoremap <silent><leader>e :lua require('oil').open(".")<cr>
+nnoremap <silent><leader>e :NvimTreeFindFileToggle<cr>
 
 " opens a new tab
 nnoremap <silent><leader>t :tabnew<cr>
@@ -96,10 +107,10 @@ nnoremap <silent><leader>v :vsp<cr>
 nnoremap <silent><leader>h :sp<cr>
 
 " Quickfix list: cnext, cprevious and copen
-nmap }} :cnext<cr>
-nmap {{ :cprevious<cr>
-nmap q :cclose<cr>
-nmap Q :copen<cr>
+nmap <Up> :copen<cr>
+nmap <Down> :cclose<cr>
+nmap <Right> :cnext<cr>
+nmap <Left> :cprevious<cr>
 
 "Move texts around
 vnoremap J :m '>+1<CR>gv=gv
@@ -126,9 +137,7 @@ nnoremap <leader>ga  : Git add %<cr>
 nnoremap <leader>gc  : Git commit<cr>
 nnoremap <leader>gp  : Git push origin master
 nnoremap <leader>gl  : Gclog<cr>
-nnoremap <leader>gd  : Git diff<cr>
 nnoremap <leader>gdv : Gvdiffsplit<cr><A-l>
-nnoremap <leader>gds : Gdiffsplit<cr><A-l>
 nnoremap <leader>gdt : Git difftool<cr>
 nnoremap <leader>gs  : Git status<cr>
 nnoremap <leader>gm  : Git merge<cr>
@@ -144,11 +153,11 @@ nnoremap <leader>gb  : GBrowse<cr>
 " autocmd filetype kotlin     map <F2> :w<CR>:vsplit term://kotlinc % -include-runtime -d a.jar && java -jar a.jar<CR><C-w>L
 
 " ToggleTerm
-autocmd filetype java       map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="javac % && java %:r"<CR>
-autocmd filetype cpp        map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="g++ -std=c++14 % && ./a.out"<CR>
-autocmd filetype python     map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="python3 %"<CR>
-autocmd filetype javascript map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="node %"<CR>
-autocmd filetype kotlin     map <F2> :w<CR>:2TermExec direction=float hide=1 cmd="kotlinc % -include-runtime -d a.jar && java -jar a.jar"<CR>
+autocmd filetype java       map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="javac % && java %:r"<CR>
+autocmd filetype cpp        map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="g++ -std=c++14 % && ./a.out"<CR>
+autocmd filetype python     map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="python3 %"<CR>
+autocmd filetype javascript map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="node %"<CR>
+autocmd filetype kotlin     map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="kotlinc % -include-runtime -d a.jar && java -jar a.jar"<CR>
 
 " Todo plugin hotkey
 nnoremap <leader>N :TodoQuickFix<CR>
@@ -162,15 +171,23 @@ cnoremap <C-j> <Down>
 cnoremap <C-K> <Up>
 
 " Easy Motion
-let g:EasyMotion_smartcase = 1  " Case insensitive unless uppercase is used
-let g:EasyMotion_use_smartsign_us = 1 " Smarter character matching
-nmap <leader>,, <Plug>(easymotion-overwin-f2)
+" let g:EasyMotion_smartcase = 1  " Case insensitive unless uppercase is used
+" let g:EasyMotion_use_smartsign_us = 1 " Smarter character matching
+" nmap <leader>,, <Plug>(easymotion-overwin-f2)
 
 " Find in File explorer
 nmap <F1> :NvimTreeFindFileToggle<CR>
 
+" Outline
+nnoremap gs :Outline<cr>
 
-nnoremap gs :SymbolsOutline<cr>
+" for movement multi-line
+nnoremap j gj
+nnoremap k gk
+
+xnoremap j gj
+xnoremap k gk
+
 
 
 lua << EOF
@@ -178,20 +195,108 @@ lua << EOF
 local builtin = require("telescope.builtin")
 local opts = { noremap = true, silent = true }
 
+-- File type based search and remembers last searched 
+local last_search_extension = ""
+local last_pattern_searched = ""
+
+local function find_files_by_extension()
+  vim.ui.input({
+    prompt = 'Enter file extension (e.g. js, java): ',
+    default = last_search_extension,  -- Prefill with the last search extension
+  }, function(input)
+    if input then
+      -- If input is not empty, save the last search extension
+      if input ~= "" then
+        last_search_extension = input
+      end
+
+      -- Determine the search pattern based on whether input is empty or not
+      local pattern = input ~= "" and "*." .. input or "*.*"  -- Search for all files if input is empty
+
+      -- Perform the search
+      builtin.find_files({
+        prompt_title = 'Find Files: ' .. (input ~= "" and "*." .. input or "All Files"),
+        find_command = { 'rg', '--files', '--glob', pattern },
+        previewer = false,
+        layout_strategy = "horizontal",
+        layout_config = {
+          width = 0.4,
+          height = 0.4,
+        },
+      })
+    else
+      print('No input provided')
+    end
+  end)
+end
+
+vim.keymap.set("n", "<leader>F", find_files_by_extension, opts)
+
 -- 🔹 Find files & general Telescope mappings
 vim.keymap.set('n', '<Space><Space>', builtin.builtin, opts)
-vim.keymap.set('n', '<leader>f', function()
-  require('telescope.builtin').find_files({
-    previewer = false,
-    layout_strategy = "horizontal",
-    layout_config = {
-      width = 0.4,
-      height = 0.4,
-    },
-  })
-end, opts)
+vim.keymap.set('n', '<leader>R', ':Telescope registers<CR>', opts)
 
-vim.keymap.set('n', '<leader>r', builtin.live_grep, opts)
+-- Function to store the last searched file pattern and use it in the next search
+vim.keymap.set('n', '<leader>f', function()
+    require('telescope.builtin').find_files({
+      prompt_title = "Search for File",
+      previewer = false,
+      layout_strategy = "horizontal",
+      layout_config = {
+        width = 0.4,
+        height = 0.4,
+      },
+    })
+  end)
+
+-- multigrep, can pass file type (*.vim) after 2 spaces
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
+local make_entry = require "telescope.make_entry"
+local conf = require "telescope.config".values
+
+local live_multigrep = function(opts)
+	opts = opts or {}
+	opts.cwd = opts.cwd or vim.uv.cwd()
+
+	local finder = finders.new_async_job {
+		command_generator = function(prompt)
+			if not prompt or prompt == "" then
+				return nil
+			end
+
+			local pieces = vim.split(prompt, "  ")
+			local args = { "rg" }
+			if pieces[1] then
+				table.insert(args, "-e")
+				table.insert(args, pieces[1])
+			end
+
+			if pieces[2] then
+				table.insert(args, "-g")
+				table.insert(args, pieces[2])
+			end
+
+			---@diagnostic disable-next-line: deprecated
+			return vim.tbl_flatten {
+				args,
+				{ "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+			}
+		end,
+		entry_maker = make_entry.gen_from_vimgrep(opts),
+		cwd = opts.cwd,
+	}
+
+	pickers.new(opts, {
+		debounce = 100,
+		prompt_title = "Multi Grep",
+		finder = finder,
+		previewer = conf.grep_previewer(opts),
+		sorter = require("telescope.sorters").empty(),
+	}):find()
+end
+
+vim.keymap.set("n", "<leader>r", live_multigrep, opts)
 
 vim.keymap.set('n', '<leader>b', function()
   require('telescope.builtin').buffers({
@@ -240,7 +345,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { noremap = true, silent = true, buffer = bufnr }
 
     -- TypeScript: Organize Imports
-    vim.keymap.set("n", "<Space>oi", function()
+    vim.keymap.set("n", "<Space>o", function()
         local params = {
             command = "_typescript.organizeImports",
             arguments = { vim.api.nvim_buf_get_name(0) },
@@ -299,14 +404,23 @@ vim.keymap.set("n", "gr", function()
 end, { noremap = true, silent = true })
 
 
--- Code Runner
-vim.keymap.set('n', '<F10>', ':RunCode<CR>', { noremap = true, silent = false })
--- vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
--- vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
--- vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
--- vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
--- vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })
--- vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false })
+-- Run current Java file using javac + java in split terminal
+vim.keymap.set("n", "<F10>", function()
+  local file = vim.fn.expand("%:t")        -- Main.java
+  local classname = vim.fn.expand("%:t:r") -- Main
+
+  vim.cmd("botright split | resize 20 | terminal")
+
+  vim.fn.chansend(vim.b.terminal_job_id,
+    "javac " .. file .. " && java " .. classname .. "\n"
+  )
+  vim.cmd("startinsert")
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>T", function()
+  vim.cmd("botright split | resize 12 | terminal")
+  vim.cmd("startinsert")
+end, { noremap = true, silent = true })
 
 
 -- code Action Preview 
@@ -315,6 +429,8 @@ vim.keymap.set({ "v", "n" }, "<leader>a", require("actions-preview").code_action
 
 -- Competitive Coding test run
 vim.keymap.set("n", "<F4>", "<cmd>CompetiTest run<CR>", { desc = "Run Competitest testcases" })
+
+
 vim.keymap.set("n", "<F5>", "<cmd>CompetiTest add_testcase<CR>", { desc = "Add new Competitest testcase" })
 vim.keymap.set("n", "<F6>", "<cmd>CompetiTest edit_testcase<CR>", { desc = "Edit Competitest testcase" })
 
