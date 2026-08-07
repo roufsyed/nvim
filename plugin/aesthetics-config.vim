@@ -1,12 +1,12 @@
 set background=dark
-colorscheme atlas
+"colorscheme atlas
 
 lua << EOF
 -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-	-- require('onedark').setup {
-	-- 	style = 'dark'
-	-- }
-	-- require('onedark').load()
+	require('onedark').setup {
+		style = 'dark'
+	}
+	require('onedark').load()
 EOF
 
 " Cursor Settings
