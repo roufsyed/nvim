@@ -1,28 +1,22 @@
 local null_ls = require("null-ls")
 
--- Register only what you want manually
+-- null-ls only covers languages whose LSP does NOT format.
+-- Go -> gopls (gofumpt), Rust -> rust-analyzer (rustfmt), C/C++ -> clangd
+-- (clang-format) all format themselves, so they are deliberately absent here.
 null_ls.setup({
 	sources = {
-		-- Formatters
 		null_ls.builtins.formatting.prettier.with({
 			filetypes = { "html", "json", "yaml", "markdown", "css" },
 		}),
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.gofumpt,
-		null_ls.builtins.formatting.goimports_reviser,
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.black,
-		null_ls.builtins.formatting.prettier.with({
-			filetypes = { "markdown" }
-		}),
 	},
-	on_attach = function(client, bufnr)
-		-- Prevent autoformat on save unless explicitly enabled per buffer
-		client.server_capabilities.documentFormattingProvider = false
-	end,
+	-- NOTE: the previous config set `documentFormattingProvider = false` in
+	-- on_attach, which disabled null-ls formatting outright -- stylua, black and
+	-- shfmt never ran. Format-on-save is scoped by filetype in lsp.lua instead.
 })
 
-
 vim.api.nvim_create_user_command("Format", function()
-	vim.lsp.buf.format({ timeout_ms = 2000 })
-end, {})
+	vim.lsp.buf.format({ timeout_ms = 3000 })
+end, { desc = "Format buffer with any capable client" })

@@ -17,13 +17,31 @@ ts.setup({
 	install_dir = vim.fn.stdpath("data") .. "/site",
 })
 
--- Replaces the old `ensure_installed`. Async, and a no-op for anything already
--- installed, so it is cheap to leave on every startup.
-ts.install({
+-- The parsers this config wants. Declared, but NOT installed on startup:
+-- `install()` logs "Downloading ..." for every missing parser on every launch,
+-- and stalls if the download cannot reach GitHub. Run `:TSSyncParsers` to
+-- install whatever is missing.
+local wanted = {
 	"bash", "c", "cpp", "css", "dockerfile", "go", "graphql", "html",
 	"java", "javascript", "json", "kotlin", "latex", "lua", "php",
-	"python", "query", "r", "tsx", "typescript", "vim", "vue", "yaml",
-})
+	"python", "query", "r", "rust", "tsx", "typescript", "vim", "vue", "yaml",
+	-- build/config files that ride along with go, rust and c++ work
+	"gomod", "gosum", "gowork", "cmake", "make", "toml", "proto",
+}
+
+vim.api.nvim_create_user_command("TSSyncParsers", function()
+	local installed = {}
+	for _, l in ipairs(ts.get_installed()) do installed[l] = true end
+
+	local missing = vim.tbl_filter(function(l) return not installed[l] end, wanted)
+	if #missing == 0 then
+		vim.notify("treesitter: all " .. #wanted .. " parsers present", vim.log.levels.INFO)
+		return
+	end
+
+	vim.notify("treesitter: installing " .. table.concat(missing, ", "), vim.log.levels.INFO)
+	ts.install(missing)
+end, { desc = "Install any declared treesitter parsers that are missing" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("treesitter_enable", { clear = true }),
