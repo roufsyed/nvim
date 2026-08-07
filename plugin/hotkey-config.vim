@@ -233,18 +233,35 @@ vim.keymap.set("n", "<leader>F", find_files_by_extension, opts)
 vim.keymap.set('n', '<Space><Space>', builtin.builtin, opts)
 vim.keymap.set('n', '<leader>R', ':Telescope registers<CR>', opts)
 
--- Function to store the last searched file pattern and use it in the next search
-vim.keymap.set('n', '<leader>f', function()
-    require('telescope.builtin').find_files({
-      prompt_title = "Search for File",
-      previewer = false,
-      layout_strategy = "horizontal",
-      layout_config = {
-        width = 0.4,
-        height = 0.4,
-      },
-    })
-  end)
+-- Current visual selection as plain text. NOT regex-escaped: this feeds
+-- telescope's fuzzy matcher, where a backslash would be matched literally.
+local function visual_selection()
+  vim.cmd('normal! "zy')
+  return (vim.fn.getreg("z"):gsub("\n", " "))
+end
+
+local function find_files_picker(default_text)
+  require('telescope.builtin').find_files({
+    prompt_title = default_text and ("Find File: " .. default_text) or "Search for File",
+    default_text = default_text,
+    previewer = false,
+    layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.4,
+      height = 0.4,
+    },
+  })
+end
+
+vim.keymap.set('n', '<leader>f', function() find_files_picker() end, opts)
+-- select something, then <leader>f -> that text prefilled in the file picker
+vim.keymap.set('v', '<leader>f', function() find_files_picker(visual_selection()) end, opts)
+
+-- IntelliJ "Go to File" = Cmd+Shift+O, translated by wezterm.lua into the F18
+-- escape sequence (kf18 = \E[17;2~). Terminals cannot see Cmd, and double-Shift
+-- is undetectable entirely -- a bare modifier press emits no bytes at all.
+vim.keymap.set('n', '<F18>', function() find_files_picker() end, opts)
+vim.keymap.set('v', '<F18>', function() find_files_picker(visual_selection()) end, opts)
 
 -- multigrep, can pass file type (*.vim) after 2 spaces
 local pickers = require "telescope.pickers"
