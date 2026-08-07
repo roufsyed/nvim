@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# auto-session state -- see plugin/auto-session-config.lua (root_dir).
+# These embed absolute machine paths (%2FUsers%2Frouf%2F...), so they are
+# runtime state, not config.
+sessions/
+
+# vim/nvim runtime scratch
+.netrwhist
+*.swp
+*.swo
