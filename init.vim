@@ -96,17 +96,15 @@ Plug 'dhruvasagar/vim-table-mode'                                 " Table render
 Plug 'MeanderingProgrammer/render-markdown.nvim'                  " Live markdown rendering
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug '3rd/image.nvim'											  " Image rendering
-Plug 'numToStr/Comment.nvim'                                      " Easy comments
+" Comment.nvim removed: Neovim 0.10+ has built-in gc/gcc commenting
 Plug 'kyazdani42/nvim-web-devicons'                               " Icons in editor
-Plug 'stevearc/oil.nvim'										  " File tree structure
-" Plug 'refractalize/oil-git-status.nvim'
+" oil.nvim removed: nvim-tree is the file explorer (<leader>e / <F1>)
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'kylechui/nvim-surround'                                     " Surrounds with quotation, brackets and tags
 Plug 'nvimtools/hydra.nvim'                                      " Custom mode
 Plug 'seblj/nvim-tabline'                                         " Fancy tab line
-Plug 'nvim-lua/plenary.nvim'                                      " Dependency of todo-comments, telescope and for UI Component designs
+Plug 'nvim-lua/plenary.nvim'                                      " Dependency of telescope, refactoring and UI component designs
 Plug 'junegunn/vim-easy-align'                                    " expression alignment
-Plug 'folke/todo-comments.nvim'                                   " Shows todos, warnings, notes, etc in quickfix, trouble or loclist
 Plug 'navarasu/onedark.nvim'                                      " Theme
 Plug 'huyvohcmc/atlas.vim'										  " Theme
 Plug 'lukas-reineke/indent-blankline.nvim'                        " Indent Guide Lines
@@ -141,9 +139,7 @@ call plug#end()
 " Lua embedded calls
 "-------------------------------------------
 lua << EOF
-    require("Comment").setup()
     require("nvim-surround").setup()
-    require("todo-comments").setup()
 	require('refactoring').setup()
 	require("outline").setup()
 EOF

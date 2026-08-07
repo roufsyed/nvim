@@ -96,9 +96,7 @@ nnoremap ss :source %<CR>
 " Redo
 nnoremap U :redo<cr>
 
-" Oil : File explorer
-" nnoremap <silent><leader>e :OilSidebar<cr>
-" nnoremap <silent><leader>e :lua require('oil').open(".")<cr>
+" File explorer
 nnoremap <silent><leader>e :NvimTreeFindFileToggle<cr>
 
 " opens a new tab
@@ -159,8 +157,7 @@ autocmd filetype python     map <F2> :w<CR>:2TermExec direction=horizontal hide=
 autocmd filetype javascript map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="node %"<CR>
 autocmd filetype kotlin     map <F2> :w<CR>:2TermExec direction=horizontal hide=1 cmd="kotlinc % -include-runtime -d a.jar && java -jar a.jar"<CR>
 
-" Todo plugin hotkey
-nnoremap <leader>N :TodoQuickFix<CR>
+" (todo-comments.nvim removed; :TodoQuickFix no longer exists)
 
 " Easy align plugin
 xmap ga <Plug>(EasyAlign)
