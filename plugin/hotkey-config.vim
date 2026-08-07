@@ -277,11 +277,11 @@ local live_multigrep = function(opts)
 				table.insert(args, pieces[2])
 			end
 
-			---@diagnostic disable-next-line: deprecated
-			return vim.tbl_flatten {
+			-- vim.tbl_flatten is deprecated and removed in Nvim 0.13
+			return vim.iter({
 				args,
 				{ "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-			}
+			}):flatten():totable()
 		end,
 		entry_maker = make_entry.gen_from_vimgrep(opts),
 		cwd = opts.cwd,
@@ -297,6 +297,11 @@ local live_multigrep = function(opts)
 end
 
 vim.keymap.set("n", "<leader>r", live_multigrep, opts)
+
+-- IntelliJ "Find in Path" = Cmd+Shift+F. macOS terminals never deliver Cmd to
+-- the TTY, so wezterm.lua binds Cmd+Shift+F to the F17 escape sequence
+-- (kf17 = \E[15;2~) and we listen for that here. See ~/.config/wezterm/wezterm.lua.
+vim.keymap.set("n", "<F17>", live_multigrep, opts)
 
 vim.keymap.set('n', '<leader>b', function()
   require('telescope.builtin').buffers({
@@ -327,15 +332,18 @@ vim.keymap.set("n", "<leader>lI", function() builtin.lsp_implementations() end, 
 -- 🔹 LSP Diagnostics (Handled Separately)
 vim.keymap.set("n", "<leader>lx", function() builtin.diagnostics({ bufnr = 0 }) end, opts)  -- Current buffer diagnostics
 
--- grep selected text
-vim.keymap.set("v", "<leader>r", function()
+-- grep selected text project-wide (IntelliJ: select, then Cmd+Shift+F)
+local function grep_selection()
     vim.cmd('normal! "zy') -- Copy selection to register z
     local selected_text = vim.fn.getreg("z") -- Get selected text
     selected_text = selected_text:gsub("([%(%)%.%+%-%*%?%[%]%^%$])", "\\%1") -- Escape only regex special characters for Ripgrep
     selected_text = selected_text:gsub("\n", " ") -- Convert newlines to spaces (Fix for multi-line selection)
 
     builtin.live_grep({ default_text = selected_text })
-end, { noremap = true, silent = true })
+end
+
+vim.keymap.set("v", "<leader>r", grep_selection, { noremap = true, silent = true })
+vim.keymap.set("v", "<F17>", grep_selection, { noremap = true, silent = true })
 
 
 
