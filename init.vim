@@ -118,6 +118,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Fuzzy fzf
 Plug 'neovim/nvim-lspconfig'                                      " LSP configurations
 Plug 'williamboman/mason.nvim'                                    " LSP Installer
 Plug 'williamboman/mason-lspconfig.nvim'                          " Mason configs wrapper
+Plug 'mfussenegger/nvim-jdtls'                                    " Java: jdtls extensions (organize imports, generate, extract, tests)
 Plug 'j-hui/fidget.nvim'                                          " LSP progress
 Plug 'hrsh7th/nvim-cmp'                                           " Completion engine
 Plug 'hrsh7th/cmp-nvim-lsp'                                       " LSP source for nvim-cmp

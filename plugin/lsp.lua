@@ -12,6 +12,11 @@ require("mason-lspconfig").setup({
 		"lua_ls", "ts_ls", "html", "cssls", "jdtls", "kotlin_language_server",
 		"pyright", "jsonls", "yamlls", "bashls",
 	},
+	-- jdtls is still installed by Mason, but nvim-jdtls starts it itself from
+	-- ftplugin/java.lua with per-project workspaces and the extended client
+	-- capabilities. Letting mason-lspconfig auto-enable it too would put two
+	-- jdtls servers on every Java buffer.
+	automatic_enable = { exclude = { "jdtls" } },
 })
 
 ----------------------------------------------------------------------
@@ -155,21 +160,7 @@ vim.lsp.config("ts_ls", { -- was `tsserver`, which no longer matches any server
 	},
 })
 
-vim.lsp.config("jdtls", {
-	settings = {
-		java = {
-			format = { enabled = true },
-			saveActions = { organizeImports = true },
-			completion = {
-				favoriteStaticMembers = {
-					"java.lang.Math.*",
-					"java.util.Objects.requireNonNull",
-					"java.util.stream.Collectors.toList",
-				},
-			},
-		},
-	},
-})
+-- jdtls is configured in ftplugin/java.lua, via nvim-jdtls.
 
 vim.lsp.config("pyright", {
 	settings = {
